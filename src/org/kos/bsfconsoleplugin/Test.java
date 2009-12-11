@@ -10,7 +10,7 @@ import java.awt.event.WindowEvent;
 /**
  * Console test
  * 
- * @author <a href="mailto:k_o_s@mail.ru" title="">Konstantin Sobolev</a>
+ * @author <a href="mailto:konstantin.sobolev@gmail.com" title="">Konstantin Sobolev</a>
  * @version $Revision$
  */
 public class Test {

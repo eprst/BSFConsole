@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2004 by Konstantin Sobolev                              *
- *   k_o_s@mail.ru                                                         *
+ *   konstantin.sobolev@gmail.com                                                         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,9 +17,10 @@ import java.util.*;
 /**
  * Plugin configuration. List of supported languages.
  *
- * @author <a href="mailto:k_o_s@mail.ru" title="">Konstantin Sobolev</a>
+ * @author <a href="mailto:konstantin.sobolev@gmail.com" title="">Konstantin Sobolev</a>
  * @version $Revision$
  */
+@SuppressWarnings({"UnusedDeclaration"})
 public class BSFConsoleConfig {
 	private ArrayList<StartupScript> startupScripts = new ArrayList<StartupScript>();
 	private BSFLanguagesRegistry bsfLanguagesRegistry = new BSFLanguagesRegistry(this);
@@ -53,10 +54,10 @@ public class BSFConsoleConfig {
 	}
 
 	@Nullable
-	public BSFLanguage findBSFLanguageByLabel(final String l){
+	public BSFLanguage findBSFLanguageByLabel(final String l) {
 		for (final BSFLanguage language : bsfLanguagesRegistry.getBsfLanguages()) {
 			if (language.getLabel().equals(l))
-					return language;
+				return language;
 		}
 		return null;
 	}
@@ -88,6 +89,10 @@ public class BSFConsoleConfig {
 
 	public BSFConsoleSearchOptions getSearchOptions() {
 		return searchOptions;
+	}
+
+	public void setSearchOptions(final BSFConsoleSearchOptions searchOptions) {
+		this.searchOptions = searchOptions;
 	}
 
 	public void addStartupScript(final StartupScript startupScript) {
@@ -192,6 +197,22 @@ public class BSFConsoleConfig {
 	public BSFLanguagesRegistry getBsfLanguagesRegistry() {
 		bsfLanguagesRegistry.setConfig(this);
 		return bsfLanguagesRegistry;
+	}
+
+	public void setBsfLanguagesRegistry(final BSFLanguagesRegistry bsfLanguagesRegistry) {
+		this.bsfLanguagesRegistry = bsfLanguagesRegistry;
+	}
+
+	public void setStartupScripts(final ArrayList<StartupScript> startupScripts) {
+		this.startupScripts = startupScripts;
+	}
+
+	public void setPreferredRecentCommandsDividerLocations(final Map<String, Integer> preferredRecentCommandsDividerLocations) {
+		this.preferredRecentCommandsDividerLocations = preferredRecentCommandsDividerLocations;
+	}
+
+	public Map<String, Integer> getPreferredRecentCommandsDividerLocations() {
+		return preferredRecentCommandsDividerLocations;
 	}
 
 	@Override

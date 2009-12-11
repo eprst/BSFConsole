@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2004 by Konstantin Sobolev                              *
- *   k_o_s@mail.ru                                                         *
+ *   konstantin.sobolev@gmail.com                                                         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -26,7 +26,7 @@ import org.kos.bsfconsoleplugin.Console;
 /**
  * Sends current (selected) editor text to BSF console.
  *
- * @author <a href="mailto:k_o_s@mail.ru" title="">Konstantin Sobolev</a>
+ * @author <a href="mailto:konstantin.sobolev@gmail.com" title="">Konstantin Sobolev</a>
  * @version $Revision$
  */
 public class SendToConsoleAction extends EditorAction {

@@ -64,7 +64,7 @@ import org.jetbrains.annotations.Nullable;
  * Slightly modified to be used in BSFConsole IDEA plugin.
  * 
  * @author <a href="mailto:casa@sweetohm.net">Michel CASABIANCA</a>
- * @author <a href="mailto:k_o_s@mail.ru" title="">Konstantin Sobolev</a>
+ * @author <a href="mailto:konstantin.sobolev@gmail.com" title="">Konstantin Sobolev</a>
  */
 public class AntConsole
 		implements Runnable {
