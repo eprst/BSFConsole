@@ -1,0 +1,5 @@
+- customizable colors
+- test more languages
+- improve BeanShell completion manager
+- more search options (regex, backwards, whole words, case sensitive)
+- rework completion UI (window with completions list)

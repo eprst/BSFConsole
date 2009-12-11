@@ -1,0 +1,368 @@
+<idea-plugin url="http://plugins.intellij.net/plugin/?id=6">
+	<name>@name</name>
+	<description>BSF and JSR-223 scripting console, also includes Ant console.</description>
+	<version>@version</version>
+	<vendor email="konstantin.sobolev@gmail.com">Konstantin Sobolev</vendor>
+	<idea-version since-build="@idea-version"/>
+
+	<change-notes>
+		<![CDATA[<html>
+		<h3>0.7</h3>
+		<ul>
+			<li>Bug fixes</li>
+			<li>Added an option to hide exception stacktraces</li>
+			<li>Added netgents Scala JSR-223 engine support. To use it: drop scala-scripting-{ver}.jar from
+			<a href="http://code.google.com/p/netgents/downloads/list">http://code.google.com/p/netgents/downloads/list</a>,
+			scala-compiler.jar and scala-library.jar from Scala 2.7.x distribution into {idea_profile_dir}/config/plugins/BSFConsole/lib
+			and Scala should appear among the available JSR-223 languages. <b>Caveats</b>: Scala 2.8 is
+			not supported by this engine. Error messages are somewhat obscured due to the way engine is implemented.
+			Simple expressions (like 1+2) evaluation doesn't print it's result. Either use <pre>print(1+2)</pre>
+			or <pre>scriptResult=1+2</pre></li>
+			<li>Added Clojure JSR-223 engine support. To use it: drop clojure-jsr223.jar from
+			<a href="http://code.google.com/p/clojure-jsr223/downloads/list">http://code.google.com/p/clojure-jsr223/downloads/list</a>
+			and clojure-{ver}.jar from Clojure distribution into {idea_profile_dir}/config/plugins/BSFConsole/lib and
+			Clojure should appear among the available JSR-223 languages.</li>
+		</ul>
+		<h3>0.6.8</h3>
+		<ul>
+		    <li>IDEA 8.1 version</li>
+		    <li>This time it should really work on JDK5</li>
+		</ul>
+		<h3>0.6.7</h3>
+		<ul>
+		    <li>IDEA 8.1 RC version</li>
+		</ul>
+		<h3>0.6.6</h3>
+		<ul>
+		    <li>IDEA 8.1 EAP version</li>
+		</ul>
+		<h3>0.6.5</h3>
+		<ul>
+		    <li>Recompiled for JDK5</li>
+		</ul>
+		<h3>0.6.4</h3>
+		<ul>
+		    <li>Bug fixes</li>
+		</ul>
+		<h3>0.6.3</h3>
+		<ul>
+		    <li>Temporary keyboard shortcuts hotfix</li>
+		</ul>
+		<h3>0.6.2</h3>
+		<ul>
+		    <li>Bug fixes</li>
+		    <li>Console keyboard shortcuts are now configurable</li>
+		    <li>UI updated</li>
+		</ul>
+		<h3>0.6.1</h3>
+		<ul>
+		    <li>Bug fixes</li>
+		</ul>
+		<h3>0.6.0</h3>
+		<ul>
+			<li>Diana support</li>
+			<li>BeanShell is bundled now</li>
+			<li>Startup scripts are now loaded in one eval() call, not line by line</li>
+			<li>Initial JSR-223 support</li>
+			<li>Various fixes</li>
+		</ul>
+		<h3>0.5.1</h3>
+		<ul>
+			<li>Slightly changed exceptions reporting</li>
+			<li>Fixed some classloading problems</li>
+			<li>Pallada compatibility removed. Now compiled with JDK 5.0</li>
+		</ul>
+		<h3>0.5</h3>
+		<ul>
+			<li>Fixes for Irida</li>
+			<li>Empty startup script now simply runs the interpreter</li>
+		</ul>
+		<h3>0.4.9.1</h3>
+		<ul>
+			<li>Version for Irida</li>
+		</ul>
+		<h3>0.4.9</h3>
+		<ul>
+			<li>Unsuccessful attempt to create AntConsole ClassLoader that
+			will load ant libs from idea/lib/ant :(</li>
+			<li>Pallada plugin version</li>
+		</ul>
+		<h3>0.4.8</h3>
+		<ul>
+			<li>ClassLoader fixes</li>
+		</ul>
+		<h3>0.4.7</h3>
+		<ul>
+			<li>BSFConsole again works on Aurora</li>
+		</ul>
+		<h3>0.4.6</h3>
+		<ul>
+			<li>renamed ruby to jruby</li>
+			<li>added options to include output and tests output paths</li>
+		</ul>
+		<h3>0.4.5.1</h3>
+		<ul>
+			<li>small fix in FileNameCompletionManager</li>
+		</ul>
+		<h3>0.4.5</h3>
+		<ul>
+			<li>completion managers refactoring, fixes, tests</li>
+			<li>improved BeanShell completion manager</li>
+			<li>added ability to choose a module to take classpath from</li>
+		</ul>
+		<h3>0.4.4</h3>
+		<ul>
+			<li>startup scripts deadlock fix</li>
+			<li>option not to store dup entries in recent commands list</li>
+		</ul>
+		<h3>0.4.3</h3>
+		<ul>
+			<li>security manager</li>
+			<li>recent commands panel</li>
+			<li>multiline commands</li>
+			<li>bugfixes</li>
+		</ul>
+		<h3>0.4.2</h3>
+		<ul>
+			<li>bugfixes</li>
+		</ul>
+		<h3>0.4.1</h3>
+		<ul>
+			<li>configurable shortcuts</li>
+		</ul>
+		<h3>0.4</h3>
+		<ul>
+			<li>Rewritten actions</li>
+			<li>Search</li>
+			<li>Send to console</li>
+		</ul>
+		<h3>0.3.9.1</h3>
+		<ul>
+			<li>NPE bugfix</li>
+		</ul>
+		<h3>0.3.9</h3>
+		<ul>
+			<li>Better streams management</li>
+		</ul>
+		<h3>0.3.8</h3>
+		<ul>
+			<li>A bit better BeanShell completion</li>
+			<li>bugfixes</li>
+		</ul>
+		<h3>0.3.7</h3>
+		<ul>
+			<li>Clear & Save buttons</li>
+			<li>bugfixes</li>
+		</ul>
+		<h3>0.3.5</h3>
+		<ul>
+			<li>Completion managers</li>
+			<li>AntConsole completion manager</li>
+			<li>BeanShell completion manager</li>
+			<li>bugfixes</li>
+		</ul>
+		<h3>0.3</h3>
+		<ul>
+			<li>System.err highlighting with red</li>
+			<li>AntConsole support</li>
+			<li>bugfixes</li>
+		</ul>
+		<h3>0.2.1</h3>
+		<ul>
+			<li>focus management</li>
+			<li>bugfixes</li>
+		</ul>
+		<h3>0.2</h3>
+		<ul>
+			<li>error icon</li>
+			<li>jython support</li>
+			<li>console gains focus after creation</li>
+			<li>updated plugin.xml</li>
+			<li>bugfixes</li>
+		</ul>
+		<h3>0.1</h3>
+		<ul>
+			<li>Initial release</li>
+		<ul>
+	</html>]]>
+	</change-notes>
+
+	<project-components>
+		<component>
+			<implementation-class>org.kos.bsfconsoleplugin.BSFConsolePlugin</implementation-class>
+			<interface-class>org.kos.bsfconsoleplugin.BSFConsolePlugin</interface-class>
+		</component>
+	</project-components>
+
+	<actions>
+		<action id="BSFConsole.SendToConsole"
+		        class="org.kos.bsfconsoleplugin.actions.SendToConsoleAction"
+		        text="Send to BSFConsole"
+		        description="Send entire text to the current BSF console">
+			<keyboard-shortcut first-keystroke="control alt shift C" keymap="$default"/>
+			<add-to-group group-id="EditorPopupMenu" anchor="last"/>
+			<add-to-group group-id="EditMenu" anchor="last"/>
+		</action>
+
+		<action id="BSFConsole.ClearConsole"
+		        class="org.kos.bsfconsoleplugin.actions.ClearConsoleAction"
+		        text="Clear"
+		        description="Clear console transcript"
+		        icon="/org/kos/bsfconsoleplugin/icons/clear.png"/>
+		<action id="BSFConsole.CloseConsole"
+		        class="org.kos.bsfconsoleplugin.actions.CloseConsoleAction"
+		        text="Close"
+		        description="Close current console"
+		        icon="/actions/cancel.png"/>
+		<action id="BSFConsole.NewConsole"
+		        class="org.kos.bsfconsoleplugin.actions.NewConsoleAction"
+		        text="New"
+		        description="Create new console"
+		        icon="/general/plus.png"/>
+		<action id="BSFConsole.SaveTranscript"
+		        class="org.kos.bsfconsoleplugin.actions.SaveTranscriptAction"
+		        text="Save"
+		        description="Save console transcript to file"
+		        icon="/actions/export.png"/>
+		<action id="BSFConsole.SearchTranscript"
+		        class="org.kos.bsfconsoleplugin.actions.SearchTranscriptAction"
+		        text="Search"
+		        description="Search console transcript"
+		        icon="/actions/find.png"/>
+		<action id="BSFConsole.Copy"
+		        class="org.kos.bsfconsoleplugin.actions.CopyAction"
+		        text="Copy"
+		        description="Copy to clipboard"
+		        icon="/actions/menu-copy.png"/>
+		<action id="BSFConsole.Cut"
+		        class="org.kos.bsfconsoleplugin.actions.CutAction"
+		        text="Cut"
+		        description="Cut to clipboard"
+		        icon="/actions/menu-cut.png"/>
+		<action id="BSFConsole.Paste"
+		        class="org.kos.bsfconsoleplugin.actions.PasteAction"
+		        text="Paste"
+		        description="Paste from clipboard"
+		        icon="/actions/menu-paste.png"/>
+
+		<action id="BSFConsole.ClearRecentCommands"
+		        class="org.kos.bsfconsoleplugin.actions.ClearRecentCommandsAction"
+		        text="Clear recent"
+		        description="Clear recent commands"/>
+
+		<action id="BSFConsole.LineStartAction"
+		        class="org.kos.bsfconsoleplugin.actions.console.LineStartAction"
+		        text="Line start"
+		        description="Move caret to the line start">
+			<keyboard-shortcut keymap="$default" first-keystroke="HOME"/>
+		</action>
+
+		<action id="BSFConsole.SelectTillLineStartAction"
+		        class="org.kos.bsfconsoleplugin.actions.console.SelectTillLineStartAction"
+		        text="Select till line start"
+		        description="Move caret to the line start with selection">
+			<keyboard-shortcut keymap="$default" first-keystroke="shift HOME"/>
+		</action>
+
+		<action id="BSFConsole.LineEndAction"
+		        class="org.kos.bsfconsoleplugin.actions.console.LineEndAction"
+		        text="Line end"
+		        description="Move caret to the line end">
+			<keyboard-shortcut keymap="$default" first-keystroke="END"/>
+		</action>
+
+		<action id="BSFConsole.SelectTillLineEndAction"
+		        class="org.kos.bsfconsoleplugin.actions.console.SelectTillLineEndAction"
+		        text="Select till line end"
+		        description="Move caret to the line end with selection">
+			<keyboard-shortcut keymap="$default" first-keystroke="shift END"/>
+		</action>
+
+		<action id="BSFConsole.RunAction"
+		        class="org.kos.bsfconsoleplugin.actions.console.RunAction"
+		        text="Run"
+		        description="Run current input">
+			<keyboard-shortcut keymap="$default" first-keystroke="ENTER"/>
+		</action>
+
+		<action id="BSFConsole.NewLineAction"
+		        class="org.kos.bsfconsoleplugin.actions.console.NewLineAction"
+		        text="New line"
+		        description="Start new line">
+			<keyboard-shortcut keymap="$default" first-keystroke="control ENTER"/>
+		</action>
+
+		<action id="BSFConsole.HistoryUpAction"
+		        class="org.kos.bsfconsoleplugin.actions.console.HistoryUpAction"
+		        text="History up"
+		        description="Previous history entry">
+			<keyboard-shortcut keymap="$default" first-keystroke="UP"/>
+		</action>
+
+		<action id="BSFConsole.HistoryDownAction"
+		        class="org.kos.bsfconsoleplugin.actions.console.HistoryDownAction"
+		        text="History down"
+		        description="Next history entry">
+			<keyboard-shortcut keymap="$default" first-keystroke="DOWN"/>
+		</action>
+
+		<action id="BSFConsole.ClearLineAction"
+		        class="org.kos.bsfconsoleplugin.actions.console.ClearLineAction"
+		        text="Clear input"
+		        description="Clear current input">
+			<keyboard-shortcut keymap="$default" first-keystroke="control u"/>
+		</action>
+
+		<action id="BSFConsole.CompletionAction"
+		        class="org.kos.bsfconsoleplugin.actions.console.CompletionAction"
+		        text="Completion"
+		        description="Complete current input">
+			<keyboard-shortcut keymap="$default" first-keystroke="TAB"/>
+		</action>
+
+		<group id="BSFConsole.Actions">
+			<reference id="BSFConsole.ClearConsole"/>
+			<reference id="BSFConsole.CloseConsole"/>
+			<reference id="BSFConsole.NewConsole"/>
+			<reference id="BSFConsole.SaveTranscript"/>
+			<reference id="BSFConsole.SearchTranscript"/>
+			<reference id="BSFConsole.Cut"/>
+			<reference id="BSFConsole.Copy"/>
+			<reference id="BSFConsole.Paste"/>
+		</group>
+
+		<group id="BSFConsole.ToolGroup">
+			<reference id="BSFConsole.NewConsole"/>
+			<reference id="BSFConsole.SearchTranscript"/>
+			<reference id="BSFConsole.ClearConsole"/>
+			<reference id="BSFConsole.SaveTranscript"/>
+			<reference id="BSFConsole.CloseConsole"/>
+		</group>
+
+		<group id="BSFConsole.MenuGroup">
+			<reference id="BSFConsole.Cut"/>
+			<reference id="BSFConsole.Copy"/>
+			<reference id="BSFConsole.Paste"/>
+			<separator/>
+			<reference id="BSFConsole.ClearConsole"/>
+			<reference id="BSFConsole.CloseConsole"/>
+		</group>
+
+		<group id="BSFConsole.RecentCommandsMenuGroup">
+			<reference id="BSFConsole.ClearRecentCommands"/>
+		</group>
+
+		<group id="BSFConsole.ConsoleGroup">
+			<reference id="BSFConsole.SelectTillLineStartAction"/>
+			<reference id="BSFConsole.LineStartAction"/>
+			<reference id="BSFConsole.SelectTillLineEndAction"/>
+			<reference id="BSFConsole.LineEndAction"/>
+			<reference id="BSFConsole.RunAction"/>
+			<reference id="BSFConsole.NewLineAction"/>
+			<reference id="BSFConsole.HistoryUpAction"/>
+			<reference id="BSFConsole.HistoryDownAction"/>
+			<reference id="BSFConsole.ClearLineAction"/>
+			<reference id="BSFConsole.CompletionAction"/>
+		</group>
+	</actions>
+</idea-plugin>

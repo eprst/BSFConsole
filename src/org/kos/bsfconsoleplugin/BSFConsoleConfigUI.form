@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.kos.bsfconsoleplugin.BSFConsoleConfigUI">
+  <grid id="c76a6" binding="contentPane" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="100" y="80" width="367" height="322"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <tabbedpane id="37f1b">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="a15e8" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <tabbedpane title="BSF Languages"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="aa891" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="8d07e" class="javax.swing.JButton" binding="addLanguageButton">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="24" height="24"/>
+                        <maximum-size width="24" height="24"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value=""/>
+                      <toolTipText value="Add"/>
+                    </properties>
+                  </component>
+                  <component id="89914" class="javax.swing.JButton" binding="removeLanguageButton">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="24" height="24"/>
+                        <maximum-size width="24" height="24"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <enabled value="false"/>
+                      <text value=""/>
+                      <toolTipText value="Remove"/>
+                    </properties>
+                  </component>
+                  <component id="b91d0" class="javax.swing.JButton" binding="resetLanguagesButton">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="24" height="24"/>
+                        <maximum-size width="24" height="24"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value=""/>
+                      <toolTipText value="Reset"/>
+                    </properties>
+                  </component>
+                  <vspacer id="a2429">
+                    <constraints>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </vspacer>
+                </children>
+              </grid>
+              <grid id="ff3f3" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <scrollpane id="6a710">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <preferred-size width="256" height="194"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="6db20" class="javax.swing.JList" binding="bsfLanguagesList">
+                        <constraints/>
+                        <properties/>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <component id="cd779" class="javax.swing.JLabel" binding="engineClassNameLabel">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="label"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
+          <grid id="100a4" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <tabbedpane title="Startup Scripts"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="3178b" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="8ebf" class="javax.swing.JButton" binding="addStartupScriptButton">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="24" height="24"/>
+                        <maximum-size width="24" height="24"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value=""/>
+                      <toolTipText value="Add"/>
+                    </properties>
+                  </component>
+                  <component id="51bbb" class="javax.swing.JButton" binding="removeStartupScriptButton">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="24" height="24"/>
+                        <maximum-size width="24" height="24"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <enabled value="false"/>
+                      <text value=""/>
+                      <toolTipText value="Remove"/>
+                    </properties>
+                  </component>
+                  <vspacer id="c54a0">
+                    <constraints>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </vspacer>
+                  <component id="8fda4" class="javax.swing.JButton" binding="moveStartupScriptUpButton">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="24" height="24"/>
+                        <maximum-size width="24" height="24"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <enabled value="false"/>
+                      <text value=""/>
+                      <toolTipText value="Move Up"/>
+                    </properties>
+                  </component>
+                  <component id="25488" class="javax.swing.JButton" binding="moveStartupScriptDownButton">
+                    <constraints>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="24" height="24"/>
+                        <maximum-size width="24" height="24"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <enabled value="false"/>
+                      <text value=""/>
+                      <toolTipText value="Move Down"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <scrollpane id="8da48">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="479bd" class="javax.swing.JTable" binding="startupScriptsTable">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </grid>
+          <grid id="9a134" layout-manager="GridLayoutManager" row-count="9" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <tabbedpane title="Options"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="3e7f2" class="javax.swing.JCheckBox" binding="restoreSystemStreamsCheckbox">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <selected value="true"/>
+                  <text value="&amp;Restore system streams"/>
+                  <toolTipText value="Restore System.out/err when command finishes (there still may exist alive threads)"/>
+                </properties>
+              </component>
+              <component id="227e8" class="javax.swing.JCheckBox" binding="outWaitsForErrCheckbox">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="System.&amp;out waits for System.err"/>
+                  <toolTipText value="System.out output will be suspended intil EOF in System.err"/>
+                </properties>
+              </component>
+              <component id="8b9fe" class="javax.swing.JCheckBox" binding="errWaitsForOutCheckbox">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="System.&amp;err waits for System.out"/>
+                  <toolTipText value="System.err output will be suspended intil EOF in System.out"/>
+                </properties>
+              </component>
+              <vspacer id="bd8a3">
+                <constraints>
+                  <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+              <component id="25598" class="javax.swing.JCheckBox" binding="storeDupsInRecentCommandsCheckbox">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Store &amp;duplicate commands in recent commands list"/>
+                  <toolTipText value="Store duplicate commands in recent commands list"/>
+                </properties>
+              </component>
+              <grid id="37926" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="40cf3" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Use classpath of module:"/>
+                    </properties>
+                  </component>
+                  <component id="515bc" class="javax.swing.JComboBox" binding="useCasslathOfModuleComboBox">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                  </component>
+                </children>
+              </grid>
+              <component id="e7a2c" class="javax.swing.JCheckBox" binding="includeOutputPathCheckbox">
+                <constraints>
+                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <enabled value="false"/>
+                  <text value="&amp;Include module output path"/>
+                  <toolTipText value="Include module output path"/>
+                </properties>
+              </component>
+              <component id="4d1b4" class="javax.swing.JCheckBox" binding="includeTestsOutputPathCheckbox">
+                <constraints>
+                  <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <enabled value="false"/>
+                  <text value="Include &amp;module tests output path"/>
+                  <toolTipText value="Include module tests output path"/>
+                </properties>
+              </component>
+              <component id="b0f8" class="javax.swing.JCheckBox" binding="hideExceptionStacktracesCheckbox">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="&amp;Hide exception stacktraces"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="29d20" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <tabbedpane title="Info"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="345ca" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Unavailable languages:"/>
+                </properties>
+              </component>
+              <scrollpane id="e9834">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="8c8f7" class="javax.swing.JTable" binding="unavailableLanguagesTable">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </grid>
+        </children>
+      </tabbedpane>
+      <component id="7c142" class="javax.swing.JLabel" binding="helpLabel">
+        <constraints border-constraint="South"/>
+        <properties>
+          <font style="1"/>
+          <text value="Label"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+  <inspectionSuppressions>
+    <suppress inspection="NoLabelFor" id="6a710"/>
+  </inspectionSuppressions>
+</form>

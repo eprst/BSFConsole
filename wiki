@@ -1,0 +1,118 @@
+---+ <nop>%TOPIC%
+
+
+---++ Purpose
+
+Console for [[BSF]] languages. 
+
+---++ Description
+
+Creates a Tool Window that can contain a number of interactive scripting language consoles.
+
+---++ Using
+
+Download any BSF-compliant languages and put them into the plugin's lib directory. Go to the plugin configuration and check that they are registered. Add  them if they are not (and leave a note here, I'll add them to the default list). Open BSFConsole tool window, create a console for any available language and enjoy :)
+
+---++ Current Features 
+
+   * Supports (almost) any BSF compatible languages.
+   * BSF languages can be added/removed.
+   * Supports JSR-223 langauges.
+   * Startup scripts
+   * Any number of concurrent consoles.
+   * Ant console integration
+   * Autocompletion for some languages (Ant, partially BeanShell)
+   * Search
+   * Recent commands panel
+   * Can take classpath from a module
+
+---+++ Tested with the following BSF languages.
+
+   * Ant console (own BSF engine)
+   * BeanShell 2.0b4
+   * Groovy
+   * Jacl   
+   * JRuby 0.7 (by some reason doesn't work with 1.1.5)
+   * Judoscript 0.9 (*) Can't load com/judoscript/jsysfxns.properties. It is in the judo.jar, but by some reason ClassLoader can't find it.
+   * Jython 2.2.1 (*)   
+   * Netrexx (*) Treats each 'exec' call as execution of a separate program.
+   * pnuts 1.1beta1
+
+(*) Doesn't support 'eval' calls for code blocks like 'a=1'. BSFConsole will always call 'exec', so commands like '1+2' won't print evaluation result.
+
+---+++ BSF Languages that doesn't work at the moment.
+   
+   * BML: can't find BSF adapter (org.apache.bml.ext.BMLEngine)
+   * javascript (Rhino): java.lang.NoSuchMethodError: org.mozilla.javascript.Context.getDebuggableEngine(). Tried 1.5R4, 1.5R4.1 and even 1.5R1
+
+(*) relies on old IBM BSF, tries to load com/ibm/bsf/util/BSFEngineImpl. BSFConsole uses newer Apache BSF.
+
+
+---+++ Tested with the following JSR-223 languages.
+
+   * BeanShell 2.0b4
+   * Jaskell 0.9 (1.0 does't work)
+   * ECMAScript
+   * Jython
+   * Groovy 
+   * java
+   * Scheme (SISC) 1.16.6
+
+for more info see https://scripting.dev.java.net/
+
+---++ Language Notes
+---++++ Ant Console
+For Ant Console to work with Pallada link (or copy) idea/lib/ant/ant.jar ant ant-nodeps.jar to idea/lib, otherwise plugin won't see them.
+---++++ Jython
+Add -Dpython.home="path-to-jython installation" to the IDEA startup script.
+---++++ Scheme (SISC)
+Add -Dsisc.home=/home/kos/sisc-1.16.6 to the IDEA startup script.
+---++++ pnuts
+Put pnuts.jar and pnuts-jakarta-bsf.jar in plugins/BSFConsole/lib.
+
+
+---++ Plugin Development
+
+Please see the topic %TOPIC%Dev, any feedback is welcome :)
+
+---++ Plugins installation
+
+   * Install plugin via plugin manager
+   * Put jars from desired BSF and JSR-223 implementations into the plugin's lib directory
+   * Restart IDEA
+
+---++ Plugin Info
+
+*New binary plugin versions are available only via plugin manager*
+
+|  Plugin Author: | Main.KonstantinSobolev |
+|  Plugin Version: | 10 Nov 2008 (V 0.6) |
+|  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  10 Nov 2008 (V 0.6): | Diana version, JSR-223 support|
+|  11 Aug 2005 (V 0.5): | Irida version|
+|  6 Jun 2004 (V 0.4.9): | Pallada version|
+|  6 Jun 2004 (V 0.4.8): | ClassLoader fixes|
+|  6 Jun 2004 (V 0.4.7): | Now works on Aurora again|
+|  4 Jun 2004 (V 0.4.6): | bugfixes, output path form modules|
+|  18 Apr 2004 (V 0.4.5): | completion managers rework, classpath form modules|
+|  18 Feb 2004 (V 0.4.3): | Recent commands panel, multiline commands, security manager, bugfixes |
+|  25 Jan 2004 (V 0.4.2): | Bugfixing |
+|  25 Jan 2004 (V 0.4): | Search, Send to console |
+|  22 Jan 2004 (V 0.3.9): | Better system streams control |
+|  16 Jan 2004 (V 0.3.8): | A bit better BeanShell completion, bugfixes |
+|  16 Jan 2004 (V 0.3.7): | Clear and Save buttons, bugfixes |
+|  13 Jan 2004 (V 0.3.5): | Completion managers, AntConsole and partially BeanShell |
+|  12 Jan 2004 (V 0.3): | Ant console, startup scripts, bugfixes |
+|  05 Jan 2004 (V 0.2.1): | focus management, bugfixes |
+|  04 Jan 2004 (V 0.2): | error icon, jython support, bugfixes |
+|  02 Jan 2004 (V 0.1): | Initial version |
+|  Jar Dependencies: | BSF-compliant languages |
+|  Plugin Home: | http://www.intellij.org/twiki/bin/view/Main/%TOPIC% |  Feedback: | http://www.intellij.org/twiki/bin/view/Main/%TOPIC%Dev
+
+__Related Topics:__ PluginDocumentation, ProjectPluginTemplate, OpenAPI, IntellijPluginDocumentation,
+IntellijPluginDocumentation, PluginDeployment, IdeasForPlugins
+
+
+-- Main.KonstantinSobolev - 10 Nov 2006
+   * [[%ATTACHURL%/BSFConsole-0.6-src.tar.bz2]]: latest version sources
+

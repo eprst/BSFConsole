@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="deploy" default="dist" basedir="..">
+	<property name="version" value="0.7"/>
+	<property name="idea.build" value="9712"/>
+	<!--<property name="idea.home" value="/home/kos/idea-${idea.build}"/>-->
+	<property name="idea.home" value="/home/kos/idea"/>
+
+	<property name="plugin.name" value="BSFConsole"/>
+	<property name="src.dir" value="src"/>
+	<property name="classes.dir" value="classes"/>
+	<property name="dist.dir" value="dist"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="resources.dir" value="resources"/>
+	<property name="build.dir" value="build"/>
+	<property name="meta.dir" value="meta"/>
+
+	<property name="idea.lib.dir" value="${idea.home}/lib"/>
+	<property name="idea.ant.dir" value="${idea.lib.dir}/ant/lib"/>
+<!--	<property name="idea.dev.dir" value="${idea.lib.dir}/dev"/>-->
+	<property name="idea.redist.dir" value="${idea.home}/redist"/>
+<!--	<property name="idea.plugins.dir" value="${idea.home}/plugins"/>-->
+	<property name="idea.plugins.dir" value="/home/kos/.IntelliJIdea90/config/plugins"/>
+
+	<property name="plugin.jar" value="${dist.dir}/${plugin.name}.jar"/>
+
+<!--	<property name="dont.run.tests" value="true"/>-->
+
+	<path id="uidesigner.classpath">
+		<fileset dir="${idea.lib.dir}">
+			<include name="bcel.jar"/>
+			<include name="jdom.jar"/>
+			<include name="asm.jar"/>
+			<include name="asm-commons.jar"/>
+ 		</fileset>
+		<fileset dir="${idea.redist.dir}" includes="javac2.jar"/>
+	</path>
+
+	<path id="project.classpath">
+		<fileset dir="${lib.dir}" includes="*.jar"/>
+		<fileset dir="${idea.lib.dir}" includes="*.jar"/>
+		<fileset dir="${idea.ant.dir}" includes="*.jar"/>
+	</path>
+
+	<path id="tests.classpath">
+		<path refid="project.classpath"/>
+		<pathelement location="${classes.dir}"/>
+ 	</path>
+
+
+	<taskdef
+		name="uidesigner"
+		classname="com.intellij.uiDesigner.ant.Javac2"
+		classpathref="uidesigner.classpath"/>
+
+	<target name="clean">
+		<delete includeemptydirs="true" failonerror="false" quiet="true" verbose="false">
+			<fileset dir="${classes.dir}/org"/>
+			<fileset dir="${classes.dir}/META-INF"/>
+			<fileset dir="${meta.dir}"/>
+			<fileset dir="${dist.dir}" includes="*"/>
+		</delete>
+	</target>
+
+	<target name="setup-excludes">
+		<condition property="exclude" value="org/kos/bsfconsoleplugin/BeanShellCompletionManager.java">
+			<not>
+				<available classname="bsh.Interpreter" classpathref="project.classpath" ignoresystemclasses="true" />
+			</not>
+		</condition>
+	</target>
+
+	<target name="compile" depends="setup-excludes">
+		<javac destdir="${classes.dir}" srcdir="${src.dir}" excludes="${exclude}" debug="true" optimize="false" target="1.5" source="1.5">
+			<classpath refid="project.classpath"/>
+		</javac>
+		<copy overwrite="true" todir="${classes.dir}">
+			<fileset dir="${resources.dir}" includes="**/*"/>
+		</copy>
+	</target>
+
+	<target name="uidesigner.compile">
+		<uidesigner
+			destdir="${classes.dir}"
+			debug="on"
+			source="1.5">
+			<src path="${src.dir}"/>
+			<include name="**/*.form"/>
+			<classpath refid="project.classpath"/>
+			<classpath path="${src.dir}"/>
+			<classpath path="${classes.dir}"/>
+		</uidesigner>
+	</target>
+
+	<target name="meta">
+		<mkdir dir="${meta.dir}/META-INF"/>
+		<copy overwrite="true" todir="${meta.dir}">
+			<fileset dir="${src.dir}" includes="META-INF/*"/>
+		</copy>
+
+		<replace file="${meta.dir}/META-INF/plugin.xml" token="@name" value="${plugin.name}"/>
+		<replace file="${meta.dir}/META-INF/plugin.xml" token="@version" value="${version}"/>
+		<replace file="${meta.dir}/META-INF/plugin.xml" token="@idea-version" value="${idea.build}"/>
+	</target>
+
+	<target name="jar" depends="meta">
+		<jar destfile="${plugin.jar}">
+			<fileset dir="${classes.dir}" excludes="**/tests/*" />
+			<fileset dir="${meta.dir}" />
+		</jar>
+	</target>
+
+	<target name="run-tests" unless="dont.run.tests" >
+		<junit printsummary="yes" fork="yes" haltonerror="true" haltonfailure="true" showoutput="false">
+			<formatter type="plain" usefile="false"/>
+			<classpath refid="tests.classpath"/>
+			<test name="org.kos.bsfconsoleplugin.tests.BSFConsolePluginTestSuite"/>
+		</junit>
+	</target>
+
+	<target name="dist" depends="clean, compile, uidesigner.compile, jar, run-tests">
+<!--	<target name="dist" depends="jar,run-tests">-->
+		<tar compression="bzip2" destfile="${dist.dir}/${plugin.name}-${version}-bin.tar.bz2">
+			<tarfileset dir="." prefix="${plugin.name}">
+				<include name="${lib.dir}/*"/>
+				<!--<exclude name="${lib.dir}/bsh*"/>-->
+			</tarfileset>
+			<tarfileset dir="${dist.dir}" prefix="${plugin.name}/lib">
+				<include name="${plugin.name}.jar"/>
+			</tarfileset>
+			<tarfileset dir="${meta.dir}" prefix="${plugin.name}">
+				<include name="META-INF/*"/>
+			</tarfileset>
+		</tar>
+		<tar compression="bzip2" destfile="${dist.dir}/${plugin.name}-${version}-src.tar.bz2">
+			<tarfileset dir=".">
+				<include name="${build.dir}/**/*"/>
+				<include name="${src.dir}/**/*"/>
+				<include name="${resources.dir}/**/*"/>
+				<include name="${lib.dir}/*"/>
+			</tarfileset>
+		</tar>
+
+		<zip destfile="${dist.dir}/${plugin.name}-${version}-bin.zip">
+			<zipfileset dir="." prefix="${plugin.name}">
+				<include name="${lib.dir}/*"/>
+				<!--<exclude name="${lib.dir}/bsh*"/>-->
+			</zipfileset>
+			<zipfileset dir="${dist.dir}" prefix="${plugin.name}/lib">
+				<include name="${plugin.name}.jar"/>
+			</zipfileset>
+			<zipfileset dir="${meta.dir}" prefix="${plugin.name}">
+				<include name="META-INF/*"/>
+			</zipfileset>
+		</zip>
+
+		<zip destfile="${dist.dir}/${plugin.name}-${version}-src.zip">
+			<zipfileset dir=".">
+				<include name="${build.dir}/**/*"/>
+				<include name="${src.dir}/**/*"/>
+				<include name="${resources.dir}/**/*"/>
+				<include name="${lib.dir}/*"/>
+			</zipfileset>
+		</zip>
+	</target>
+
+	<target name="install" depends="dist">
+		<delete dir="${idea.plugins.dir}/${plugin.name}" failonerror="false"/>
+		<untar compression="bzip2" src="${dist.dir}/${plugin.name}-${version}-bin.tar.bz2" dest="${idea.plugins.dir}" overwrite="true"/>
+	</target>
+</project>
