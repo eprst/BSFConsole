@@ -1,3 +1,4 @@
+- ?fix console colors bug
 - customizable colors
 - test more languages
 - improve BeanShell completion manager

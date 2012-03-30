@@ -1,13 +1,3 @@
-/***************************************************************************
- *   Copyright (C) 2004 by Konstantin Sobolev                              *
- *   konstantin.sobolev@gmail.com                                                         *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- ***************************************************************************/
-
 package org.kos.bsfconsoleplugin;
 
 import com.intellij.openapi.Disposable;
@@ -27,7 +17,6 @@ import java.io.*;
  * Panel for the ToolWindow.
  *
  * @author <a href="mailto:konstantin.sobolev@gmail.com" title="">Konstantin Sobolev</a>
- * @version $Revision$
  */
 public class ConsoleTab extends JPanel implements Disposable {
 	public static final String TOOL_GROUP = "BSFConsole.ToolGroup";
@@ -75,7 +64,7 @@ public class ConsoleTab extends JPanel implements Disposable {
 			return;
 
 		final String scriptName = startupScript.scriptFileName;
-		if (scriptName == null || "".equals(scriptName.trim())) {
+		if (scriptName == null || scriptName.trim().isEmpty()) {
 			panel.getInterpreter().start();
 			return;
 		}
@@ -132,7 +121,7 @@ public class ConsoleTab extends JPanel implements Disposable {
 			return panel;
 		} catch (InterpreterInstantiationException e) {
 			//LOG.debug(e);
-			Messages.showMessageDialog("Error loading engine: " + e.getMessage(), "Error loading engine", Messages.getErrorIcon());
+			Messages.showMessageDialog("Error loading engine: " + e.getMessage(), "Error Loading Engine", Messages.getErrorIcon());
 			//e.printStackTrace();
 			//JOptionPane.showMessageDialog(null, "error loading engine: " + e);
 			return null;

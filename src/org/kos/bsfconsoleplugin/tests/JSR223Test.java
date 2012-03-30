@@ -1,13 +1,3 @@
-/*
- * EnterpriseWizard
- *
- * Copyright (C) 2007 EnterpriseWizard, Inc. All Rights Reserved.
- *
- * $Id$
- * Created by Konstantin Sobolev (kos@supportwizard.com) on 09.11.2008$
- * Last modification $Date$
- */
-
 package org.kos.bsfconsoleplugin.tests;
 
 import javax.script.ScriptEngineManager;
@@ -27,6 +17,7 @@ public class JSR223Test {
 			final ArrayList<URL> jars = new ArrayList<URL>();
 
 			final File[] fs = lib.listFiles();
+			assert fs != null;
 			for (final File f : fs) {
 				if (f.isFile() && f.getName().endsWith(".jar"))
 					jars.add(f.toURI().toURL());

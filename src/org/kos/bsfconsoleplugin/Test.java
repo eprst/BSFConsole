@@ -11,7 +11,6 @@ import java.awt.event.WindowEvent;
  * Console test
  * 
  * @author <a href="mailto:konstantin.sobolev@gmail.com" title="">Konstantin Sobolev</a>
- * @version $Revision$
  */
 public class Test {
 	public static void main(final String[] args) {
@@ -46,7 +45,7 @@ public class Test {
 					}
 			);
 
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 			//new Thread(){public void run() {Thread.sleep(2000);System.out.println("haha");}}.start();
 

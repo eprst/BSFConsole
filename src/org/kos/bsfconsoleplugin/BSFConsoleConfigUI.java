@@ -1,13 +1,3 @@
-/***************************************************************************
- *   Copyright (C) 2004 by Konstantin Sobolev                              *
- *   konstantin.sobolev@gmail.com                                                         *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- ***************************************************************************/
-
 package org.kos.bsfconsoleplugin;
 
 import com.intellij.openapi.fileChooser.FileChooser;
@@ -37,7 +27,6 @@ import java.util.List;
  * Plugin configuration UI.
  *
  * @author <a href="mailto:konstantin.sobolev@gmail.com" title="">Konstantin Sobolev</a>
- * @version $Revision$
  */
 public class BSFConsoleConfigUI {
 	//private static final Logger LOG = Logger.getInstance("org.kos.bsfconsoleplugin.BSFConsoleConfigUI");
@@ -119,7 +108,7 @@ public class BSFConsoleConfigUI {
 			helpLabel.setText("To add new languages put their jars into plugin's lib dir");
 		else {
 			final String fileSep = System.getProperty("file.separator");
-			final StringBuffer sb = new StringBuffer(pluginsPath);
+			final StringBuilder sb = new StringBuilder(pluginsPath);
 			sb.append(fileSep).append(BSFConsolePlugin.PLUGIN_NAME).append(fileSep).append("lib");
 			helpLabel.setText("To add new languages put their jars into " + sb);
 		}
@@ -726,7 +715,7 @@ public class BSFConsoleConfigUI {
 
 		final JFrame frame = new JFrame();
 		frame.setBounds(300, 300, 600, 600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout());
 		//broken
 		//frame.getContentPane().add(new BSFConsoleConfigUI(null, _config).getContentPane(), BorderLayout.CENTER);

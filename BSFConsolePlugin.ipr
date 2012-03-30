@@ -4,7 +4,7 @@
     <defaultAnt bundledAnt="true" />
     <buildFile url="file://$PROJECT_DIR$/build/build.xml">
       <additionalClassPath>
-        <entry path="file://$PROJECT_DIR$/../../idea/lib/junit.jar" />
+        <entry path="file://$USER_HOME$/idea/lib/junit.jar" />
       </additionalClassPath>
       <antReference bundledAnt="true" />
       <customJdkName value="" />
@@ -108,7 +108,7 @@
   </component>
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
   <component name="EntryPointsManager">
-    <entry_points />
+    <entry_points version="2.0" />
   </component>
   <component name="ExportToHTMLSettings">
     <option name="PRINT_LINE_NUMBERS" value="false" />
@@ -156,6 +156,7 @@
           <option name="IGNORE_DEPRECATED" value="false" />
           <option name="IGNORE_JAVADOC_PERIOD" value="true" />
           <option name="IGNORE_DUPLICATED_THROWS" value="false" />
+          <option name="IGNORE_POINT_TO_ITSELF" value="false" />
           <option name="myAdditionalJavadocTags" value="ejb.interface-method,ejb.create-method,ejb:interface-method,ejb:persistent-field,jboss.method-attributes,ejb:transaction,ejb.transaction,ejb:create-method,ejb:pk-field,ejb:persistence,jboss:column-name,ejb.persistence,ejb.pk-field,ejb.home-method,ejb.persistent-field" />
         </inspection_tool>
         <inspection_tool class="LiteralAsArgToStringEquals" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -163,7 +164,10 @@
           <option name="REPORT_VARIABLES" value="true" />
           <option name="REPORT_PARAMETERS" value="true" />
         </inspection_tool>
-        <inspection_tool class="MissingOverrideAnnotation" enabled="true" level="WARNING" enabled_by_default="true" />
+        <inspection_tool class="MissingOverrideAnnotation" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="ignoreObjectMethods" value="true" />
+          <option name="ignoreAnonymousClassMethods" value="false" />
+        </inspection_tool>
         <inspection_tool class="MissortedModifiers" enabled="true" level="WARNING" enabled_by_default="true">
           <option name="m_requireAnnotationsFirst" value="true" />
         </inspection_tool>
@@ -179,6 +183,12 @@
           <group names="y,height,top,bottom" />
         </inspection_tool>
         <inspection_tool class="ThrowableInstanceNeverThrown" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="UnusedDeclaration" enabled="true" level="INFO" enabled_by_default="true">
+          <option name="ADD_MAINS_TO_ENTRIES" value="true" />
+          <option name="ADD_APPLET_TO_ENTRIES" value="true" />
+          <option name="ADD_SERVLET_TO_ENTRIES" value="true" />
+          <option name="ADD_NONJAVA_TO_ENTRIES" value="true" />
+        </inspection_tool>
         <inspection_tool class="UnusedMessageFormatParameter" enabled="false" level="WARNING" enabled_by_default="false" />
       </profile>
     </profiles>
@@ -324,6 +334,15 @@
       </item>
     </group>
   </component>
+  <component name="ProjectCodeStyleSettingsManager">
+    <option name="PER_PROJECT_SETTINGS">
+      <value>
+        <XML>
+          <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
+        </XML>
+      </value>
+    </option>
+  </component>
   <component name="ProjectDetails">
     <option name="projectName" value="BSFConsolePlugin" />
   </component>
@@ -335,7 +354,10 @@
       <module fileurl="file://$PROJECT_DIR$/BSFConsole.iml" filepath="$PROJECT_DIR$/BSFConsole.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="IDEA IC-93.13" project-jdk-type="IDEA JDK" />
+  <component name="ProjectResources">
+    <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="IDEA IU-117.105" project-jdk-type="IDEA JDK" />
   <component name="Scrappy">
     <scrapTab name="Scrap" />
     <imports />
@@ -389,12 +411,10 @@
         <root url="jar://$PROJECT_DIR$/lib/judo-engine.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/juel-engine.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/swing-worker-1.2.jar!/" />
-        <root url="jar://$PROJECT_DIR$/../../idea/lib/ant/lib/ant.jar!/" />
+        <root url="jar://$USER_HOME$/idea/lib/ant/lib/ant.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES>
-        <root url="file://$PROJECT_DIR$/../../tmp/jsr-223/src" />
-      </SOURCES>
+      <SOURCES />
     </library>
   </component>
 </project>

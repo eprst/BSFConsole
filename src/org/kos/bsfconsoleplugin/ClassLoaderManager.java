@@ -33,7 +33,7 @@ public class ClassLoaderManager {
 		if (libPath != null)
 			addUrlsFromDir(new File(libPath, "ant"), urls, new String[0], path);
 
-		final StringBuffer sb = new StringBuffer(PathManager.getPluginsPath());
+		final StringBuilder sb = new StringBuilder(PathManager.getPluginsPath());
 		//noinspection AccessStaticViaInstance
 		sb.append(File.separatorChar).append(BSFConsolePlugin.PLUGIN_NAME);
 		sb.append(File.separatorChar).append("lib");

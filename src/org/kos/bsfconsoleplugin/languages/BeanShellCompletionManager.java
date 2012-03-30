@@ -1,13 +1,3 @@
-/***************************************************************************
- *   Copyright (C) 2004 by Konstantin Sobolev                              *
- *   konstantin.sobolev@gmail.com                                                         *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- ***************************************************************************/
-
 package org.kos.bsfconsoleplugin.languages;
 
 import bsh.ClassIdentifier;
@@ -33,7 +23,6 @@ import java.util.List;
  * commands aren't load, e.g. 'cwd' won't be completed until you will run it once.
  *
  * @author <a href="mailto:konstantin.sobolev@gmail.com" title="">Konstantin Sobolev</a>
- * @version $Revision$
  */
 public class BeanShellCompletionManager implements CompletionManager {
 	private Interpreter interpreter;
@@ -164,7 +153,7 @@ public class BeanShellCompletionManager implements CompletionManager {
 
 	private String removeLineBreaks(final String line) {
 		final int lineLength = line.length();
-		final StringBuffer res = new StringBuffer(lineLength);
+		final StringBuilder res = new StringBuilder(lineLength);
 
 		for (int i = 0; i < lineLength; i++) {
 			final char c = line.charAt(i);

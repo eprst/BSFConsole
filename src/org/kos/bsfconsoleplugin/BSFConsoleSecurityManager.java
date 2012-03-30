@@ -1,12 +1,3 @@
-/*
- * SupportWizard 2
- *
- * Copyright (C) 2003 ISC corp. All Rights Reserved.
- *
- * $Id$
- * Created by Konstantin Sobolev (konstantin.sobolev@gmail.com) on 14.02.2004
- * Last modification $Date$
- */
 package org.kos.bsfconsoleplugin;
 
 import java.io.FileDescriptor;
@@ -17,7 +8,6 @@ import java.security.Permission;
  * Security manager that disallows <code>System.exit()</code>.
  * 
  * @author <a href="mailto:konstantin.sobolev@gmail.com" title="">Konstantin Sobolev</a>
- * @version $Revision$
  */
 public class BSFConsoleSecurityManager extends SecurityManager {
 	private final SecurityManager securityManager;

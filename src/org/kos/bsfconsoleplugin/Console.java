@@ -1,17 +1,8 @@
-/***************************************************************************
- *   Copyright (C) 2004 by Konstantin Sobolev                              *
- *   konstantin.sobolev@gmail.com                                                         *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- ***************************************************************************/
-
 package org.kos.bsfconsoleplugin;
 
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.util.IconLoader;
+import org.jetbrains.annotations.Nullable;
 import org.kos.bsfconsoleplugin.languages.CompletionManager;
 import org.kos.bsfconsoleplugin.actions.console.NopAction;
 
@@ -30,7 +21,6 @@ import java.util.concurrent.ExecutionException;
  * Console component.
  *
  * @author <a href="mailto:konstantin.sobolev@gmail.com" title="">Konstantin Sobolev</a>
- * @version $Revision$
  */
 public class Console extends JScrollPane implements KeyListener {
 	public static final String CONSOLE_GROUP = "BSFConsole.ConsoleGroup";
@@ -90,7 +80,7 @@ public class Console extends JScrollPane implements KeyListener {
 		this(plugin, null, null, null);
 	}
 
-	public Console(final BSFConsolePlugin plugin, final InputStream cin, final InputStream cerr, final OutputStream cout) {
+	public Console(final BSFConsolePlugin plugin, @Nullable final InputStream cin, @Nullable final InputStream cerr, @Nullable final OutputStream cout) {
 		this.plugin = plugin;
 		constructed = false;
 
@@ -279,7 +269,7 @@ public class Console extends JScrollPane implements KeyListener {
 				try {
 					if (cmdLength > 0)
 						suspendedCommand = cmd;
-					acceptLine(new StringBuffer().append(input).append(EOC).append("\n").toString());
+					acceptLine(input + EOC + "\n");
 					resetCommandStart();
 					moveCaretToCmdStart();
 				} finally {
@@ -317,7 +307,7 @@ public class Console extends JScrollPane implements KeyListener {
 					The getKeyCode function always returns VK_UNDEFINED for
 					keyTyped events, so backspace is not fully consumed.
 				*/
-				if (e.paramString().indexOf("Backspace") != -1) {
+				if (e.paramString().contains("Backspace")) {
 					if (text.getCaretPosition() <= cmdStart) {
 						e.consume();
 						break;
@@ -413,7 +403,7 @@ public class Console extends JScrollPane implements KeyListener {
 		}
 
 		//Try to complete as much as possible
-		final StringBuffer commonPrefix = new StringBuffer();
+		final StringBuilder commonPrefix = new StringBuilder();
 		boolean finishedOneOfTheVaiants = false;
 		outerLoop:
 		for (int index = 0; ; index++) {
@@ -695,7 +685,7 @@ public class Console extends JScrollPane implements KeyListener {
 		print(s, null, color);
 	}
 
-	private void print(final Serializable s, final Font font, final Color color) {
+	private void print(final Serializable s, @Nullable final Font font, final Color color) {
 		assertEDT();
 		final AttributeSet old = getStyle();
 
@@ -716,7 +706,7 @@ public class Console extends JScrollPane implements KeyListener {
 			return setStyle(null, -1, color);
 	}
 
-	private AttributeSet setStyle(final String fontFamilyName, final int size, final Color color) {
+	private AttributeSet setStyle(@Nullable final String fontFamilyName, final int size, final Color color) {
 		assertEDT();
 		final MutableAttributeSet attr = new SimpleAttributeSet();
 		if (color != null)
@@ -890,18 +880,19 @@ public class Console extends JScrollPane implements KeyListener {
 			text.setEnabled(true);
 			text.requestFocusInWindow();
 		}
-		shakeMouse();
+//		shakeMouse();
 	}
 
-	// by some reason mouse cursor doesn't change in IDEA until the pointer is moved.
-	// this is an ugly hack to overcome it
-	private void shakeMouse() {
-		final Point location = MouseInfo.getPointerInfo().getLocation();
-		try {
-			new Robot().mouseMove(location.x, location.y);
-		} catch (AWTException ignored) {
-		}
-	}
+	//0.7.2: this breaks xinerama & follow focus WMs
+//	// by some reason mouse cursor doesn't change in IDEA until the pointer is moved.
+//	// this is an ugly hack to overcome it
+//	private void shakeMouse() {
+//		final Point location = MouseInfo.getPointerInfo().getLocation();
+//		try {
+//			new Robot().mouseMove(location.x, location.y);
+//		} catch (AWTException ignored) {
+//		}
+//	}
 
 //	public boolean cursorOnNewLine() {
 //		final int len = getTextLength();

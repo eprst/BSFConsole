@@ -1,13 +1,3 @@
-/*
- * EnterpriseWizard
- *
- * Copyright (C) 2007 EnterpriseWizard, Inc. All Rights Reserved.
- *
- * $Id$
- * Created by Konstantin Sobolev (kos@supportwizard.com) on 17.11.2008$
- * Last modification $Date$
- */
-
 package org.kos.bsfconsoleplugin.actions.console;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -19,8 +9,7 @@ import org.kos.bsfconsoleplugin.actions.BSFConsoleAction;
 /**
  * Console editor action.
  *
- * @author <a href="mailto:kos@supportwizard.com" title="">Konstantin Sobolev</a>
- * @version $ Revision$
+ * @author <a href="mailto:konstantin.sobolev@gmail.com" title="">Konstantin Sobolev</a>
  */
 public abstract class ConsoleAction extends BSFConsoleAction {
 	@Override

@@ -1,13 +1,3 @@
-/*
- * EnterpriseWizard
- *
- * Copyright (C) 2007 EnterpriseWizard, Inc. All Rights Reserved.
- *
- * $Id$
- * Created by Konstantin Sobolev (kos@supportwizard.com) on 08.11.2008$
- * Last modification $Date$
- */
-
 package org.kos.bsfconsoleplugin;
 
 import java.util.ArrayList;
@@ -20,8 +10,7 @@ import java.awt.*;
 /**
  * Base class for language interpreters.
  *
- * @author <a href="mailto:kos@supportwizard.com" title="">Konstantin Sobolev</a>
- * @version $ Revision$
+ * @author <a href="mailto:konstantin.sobolev@gmail.com" title="">Konstantin Sobolev</a>
  */
 public abstract class AbstractInterpreter implements Interpreter {
 	protected ArrayList<InputListener> inputListeners = new ArrayList<InputListener>(5);
@@ -59,7 +48,7 @@ public abstract class AbstractInterpreter implements Interpreter {
 						final String lineSep = System.getProperty("line.separator");
 						try {
 							while (!Thread.interrupted()) {
-								final StringBuffer text = new StringBuffer();
+								final StringBuilder text = new StringBuilder();
 								String line = AbstractInterpreter.this.in.readLine();
 								while (line.length() == 0 || line.charAt(line.length() - 1) != Console.EOC) {
 									text.append(line).append(lineSep);
@@ -110,7 +99,8 @@ public abstract class AbstractInterpreter implements Interpreter {
 
 	protected void printException(final Throwable e) {
 		final String err;
-		if (plugin.getState().isHideExceptionStacktraces())
+		final BSFConsoleConfig state = plugin.getState();
+		if (state != null && state.isHideExceptionStacktraces())
 			err = e.toString();
 		else {
 			final StringWriter sw = new StringWriter(256);

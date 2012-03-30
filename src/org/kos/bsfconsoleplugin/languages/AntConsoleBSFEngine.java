@@ -1,13 +1,3 @@
-/***************************************************************************
- *   Copyright (C) 2004 by Konstantin Sobolev                              *
- *   konstantin.sobolev@gmail.com                                                         *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- ***************************************************************************/
-
 package org.kos.bsfconsoleplugin.languages;
 
 import com.intellij.openapi.application.PathManager;
@@ -31,7 +21,6 @@ import java.util.Vector;
  * Simple BSF Engine for <a href="http://www.sdv.fr/pages/casa/html/sat.en.html">Ant Console</a>.
  *
  * @author <a href="mailto:konstantin.sobolev@gmail.com" title="">Konstantin Sobolev</a>
- * @version $Revision$
  */
 public class AntConsoleBSFEngine implements BSFEngine {
 	private static final Logger LOG = Logger.getInstance("org.kos.bsfconsoleplugin.languages.AntConsoleBSFEngine");
@@ -280,7 +269,7 @@ public class AntConsoleBSFEngine implements BSFEngine {
 						LOG.info("added " + urls[i]);
 					}
 
-					final StringBuffer sb = new StringBuffer(PathManager.getPluginsPath());
+					final StringBuilder sb = new StringBuilder(PathManager.getPluginsPath());
 					sb.append(File.separatorChar).append(BSFConsolePlugin.PLUGIN_NAME);
 					sb.append(File.separatorChar).append("lib");
 					//sb.append(File.separatorChar).append("sat.jar");

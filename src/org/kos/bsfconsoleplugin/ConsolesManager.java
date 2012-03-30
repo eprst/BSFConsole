@@ -1,13 +1,3 @@
-/*
- * EnterpriseWizard
- *
- * Copyright (C) 2007 EnterpriseWizard, Inc. All Rights Reserved.
- *
- * \$Id$
- * Created by Konstantin Sobolev (kos@enterprisetwizard.com) on 20.11.2008
- * Last modification \$Date$
- */
-
 package org.kos.bsfconsoleplugin;
 
 import com.intellij.openapi.project.Project;
@@ -24,8 +14,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Manages all open consoles.
  *
- * @author <a href="mailto:kos@supportwizard.com" title="">Konstantin Sobolev</a>
- * @version $ Revision$
+ * @author <a href="mailto:konstantin.sobolev@gmail.com" title="">Konstantin Sobolev</a>
  */
 public class ConsolesManager {
 	private final BSFConsolePlugin plugin;

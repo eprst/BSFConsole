@@ -1,13 +1,3 @@
-/*
- * EnterpriseWizard
- *
- * Copyright (C) 2007 EnterpriseWizard, Inc. All Rights Reserved.
- *
- * $Id$
- * Created by Konstantin Sobolev (kos@supportwizard.com) on 08.11.2008$
- * Last modification $Date$
- */
-
 package org.kos.bsfconsoleplugin;
 
 import org.jetbrains.annotations.NotNull;
@@ -16,8 +6,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Language information.
  *
- * @author <a href="mailto:kos@supportwizard.com" title="">Konstantin Sobolev</a>
- * @version $ Revision$
+ * @author <a href="mailto:konstantin.sobolev@gmail.com" title="">Konstantin Sobolev</a>
  */
 public interface Language extends Comparable {
 	boolean isAvailable();

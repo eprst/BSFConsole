@@ -7,6 +7,10 @@
 
 	<change-notes>
 		<![CDATA[<html>
+		<h3>0.7.2</h3>
+		<ul>
+			<li>Fixed mouse behavor</li>
+		</ul>
 		<h3>0.7.1</h3>
 		<ul>
 			<li>Fixed config saving bug</li>
