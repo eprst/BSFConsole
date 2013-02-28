@@ -17,5 +17,5 @@ public interface Language extends Comparable {
 	@NotNull
 	String getLabel();
 	@NotNull
-	Interpreter createInterpreter(final BSFConsolePlugin plugin, final Console console) throws InterpreterInstantiationException;
+	Interpreter createInterpreter(@Nullable final BSFConsolePlugin plugin, final Console console) throws InterpreterInstantiationException;
 }

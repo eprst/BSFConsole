@@ -1,6 +1,7 @@
 package org.kos.bsfconsoleplugin;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +20,7 @@ public class BSFConsolePanel extends JPanel {
 	private final String languageName;
 	private final JSplitPane splitPane;
 
-	public BSFConsolePanel(final BSFConsolePlugin plugin, final Language language, final boolean start) throws InterpreterInstantiationException {
+	public BSFConsolePanel(@Nullable final BSFConsolePlugin plugin, final Language language, final boolean start) throws InterpreterInstantiationException {
 		console = new Console(plugin);
 		languageName = language.getLanguageName();
 		interpreter = language.createInterpreter(plugin, console);

@@ -59,7 +59,7 @@ public class SearchTranscriptDialog extends DialogWrapper {
 					@Override
 					public void run() {
 						setOKActionEnabled(notEmpty);
-						if (ok && notEmpty)
+						if (ok)
 							doOKAction();
 					}
 				});

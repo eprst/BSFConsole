@@ -4,6 +4,9 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.jetbrains.annotations.Nullable;
+
+
 /**
  * Completion manager factory.
  * 
@@ -37,6 +40,7 @@ public class CompletionManagerFactory {
 	private CompletionManagerFactory() {
 	}
 
+	@Nullable
 	public CompletionManager getCompletionManager(final String languageName, final Object engine) {
 		for (final Class<CompletionManager> completionManagerClass : COMPLETION_MANAGER_CLASSES) {
 			try {

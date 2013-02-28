@@ -2,6 +2,9 @@ package org.kos.bsfconsoleplugin;
 
 import java.io.File;
 
+import org.jetbrains.annotations.Nullable;
+
+
 /**
  * Startup script description.
  * 
@@ -18,7 +21,7 @@ public class StartupScript {
 		this (other.languageLabel, other.scriptFileName);
 	}
 
-	public StartupScript(final String languageLabel, final String scriptFileName) {
+	public StartupScript(final String languageLabel, @Nullable final String scriptFileName) {
 		this.languageLabel = languageLabel;
 		this.scriptFileName = scriptFileName;
 	}

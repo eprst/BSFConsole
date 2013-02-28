@@ -1,11 +1,16 @@
 package org.kos.bsfconsoleplugin;
 
+
+import com.intellij.ui.components.JBList;
+import com.intellij.ui.components.JBScrollPane;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+
 
 /**
  * Panel with a list of commands history.
@@ -13,7 +18,9 @@ import java.util.ArrayList;
  * @author <a href="mailto:konstantin.sobolev@gmail.com" title="">Konstantin Sobolev</a>
  */
 public class RecentCommandsPanel extends JPanel {
+	@Nullable
 	private Console console;
+	@Nullable
 	private BSFConsolePlugin plugin;
 
 	private JScrollPane scrollPane;
@@ -21,7 +28,7 @@ public class RecentCommandsPanel extends JPanel {
 
 	private RecentCommandsListModel model;
 
-	public RecentCommandsPanel(final Console console, final BSFConsolePlugin plugin) {
+	public RecentCommandsPanel(@Nullable final Console console, @Nullable final BSFConsolePlugin plugin) {
 		this.console = console;
 		this.plugin = plugin;
 
@@ -57,8 +64,8 @@ public class RecentCommandsPanel extends JPanel {
 
 	private void init() {
 		model = new RecentCommandsListModel();
-		commandsList = new JList(model);
-		scrollPane = new JScrollPane(commandsList);
+		commandsList = new JBList(model);
+		scrollPane = new JBScrollPane(commandsList);
 
 		setLayout(new BorderLayout());
 		add(scrollPane, BorderLayout.CENTER);
@@ -96,8 +103,8 @@ public class RecentCommandsPanel extends JPanel {
 
 	private boolean shouldntAddCommandToHistory(final String command) {
 		return command == null || command.trim().length() == 0 || command.lastIndexOf('\n') != -1 || command.lastIndexOf('\r') != -1 ||
-		       command.equals(model.getLastElement()) ||
-		       plugin != null && !plugin.getConfig().isStoreDupsInRecentCommands() && model.containsElement(command);
+				command.equals(model.getLastElement()) ||
+				plugin != null && !plugin.getConfig().isStoreDupsInRecentCommands() && model.containsElement(command);
 	}
 
 	private class RecentCommandsListModel extends AbstractListModel {
@@ -164,7 +171,6 @@ public class RecentCommandsPanel extends JPanel {
 	public static void main(final String[] args) {
 		final RecentCommandsPanel panel = new RecentCommandsPanel(null, null);
 
-
 		final JFrame frame = new JFrame("test");
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.getContentPane().add(panel);
@@ -180,7 +186,6 @@ public class RecentCommandsPanel extends JPanel {
 			}
 		});
 		frame.getContentPane().add(tf, BorderLayout.SOUTH);
-
 
 		frame.setVisible(true);
 	}

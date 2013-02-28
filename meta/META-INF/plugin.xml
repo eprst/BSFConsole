@@ -1,9 +1,9 @@
 <idea-plugin url="http://plugins.intellij.net/plugin/?id=6">
-	<name>@name</name>
+	<name>BSFConsole</name>
 	<description>BSF and JSR-223 scripting console, also includes Ant console.</description>
-	<version>@version</version>
+	<version>0.8</version>
 	<vendor email="konstantin.sobolev@gmail.com">Konstantin Sobolev</vendor>
-	<idea-version since-build="@idea-version"/>
+	<idea-version since-build="123.169"/>
 
 	<change-notes>
 		<![CDATA[<html>

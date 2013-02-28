@@ -10,6 +10,7 @@ import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.application.PathManager;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -309,7 +310,7 @@ public class BSFConsoleConfigUI {
 					public void actionPerformed(final ActionEvent e) {
 						final boolean selected = outWaitsForErrCheckbox.isSelected();
 						BSFConsoleConfigUI.this.config.setOutWaitsForErr(selected);
-						if (selected && selected) {
+						if (selected) {
 							BSFConsoleConfigUI.this.config.setErrWaitsForOut(false);
 							errWaitsForOutCheckbox.setSelected(false);
 						}
@@ -323,7 +324,7 @@ public class BSFConsoleConfigUI {
 					public void actionPerformed(final ActionEvent e) {
 						final boolean selected = errWaitsForOutCheckbox.isSelected();
 						BSFConsoleConfigUI.this.config.setErrWaitsForOut(selected);
-						if (selected && selected) {
+						if (selected) {
 							BSFConsoleConfigUI.this.config.setOutWaitsForErr(false);
 							outWaitsForErrCheckbox.setSelected(false);
 						}
@@ -422,7 +423,7 @@ public class BSFConsoleConfigUI {
 		}
 	}
 
-	private boolean isOutputPathValid(final String moduleName, final Map<String, Module> namesToModules, final boolean testOutputPath) {
+	private boolean isOutputPathValid(@Nullable final String moduleName, final Map<String, Module> namesToModules, final boolean testOutputPath) {
 		if (moduleName == null || moduleName.length() == 0)
 			return false;
 		final Module m = namesToModules.get(moduleName);
@@ -655,7 +656,7 @@ public class BSFConsoleConfigUI {
 			if (value != null)
 				f = LocalFileSystem.getInstance().findFileByPath(value.toString());
 
-			final VirtualFile[] vf = FileChooser.chooseFiles(project, fcd, f);
+			final VirtualFile[] vf = FileChooser.chooseFiles(fcd, project, f);
 			if (vf.length == 1 && vf[0].isValid()) {
 				delegate.setValue(vf[0].getPath());
 				super.fireEditingStopped();

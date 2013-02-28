@@ -3,6 +3,8 @@ package org.kos.bsfconsoleplugin.actions;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.ui.components.JBList;
+import com.intellij.ui.components.JBScrollPane;
 import org.kos.bsfconsoleplugin.BSFConsolePlugin;
 import org.kos.bsfconsoleplugin.ConsolesManager;
 import org.kos.bsfconsoleplugin.Language;
@@ -55,7 +57,7 @@ public class NewConsoleAction extends BSFConsoleAction {
 
 			final List<Language> availableLanguages = plugin.getLanguageManager().getAvailableLanguages();
 			final int n = availableLanguages.size();
-			availableLanguagesList = new JList(availableLanguages.toArray(new Object[n]));
+			availableLanguagesList = new JBList(availableLanguages.toArray(new Object[n]));
 			if (n > 0)
 				availableLanguagesList.setSelectedIndex(0);
 
@@ -81,7 +83,7 @@ public class NewConsoleAction extends BSFConsoleAction {
 		 */
 		@Override
 		protected JComponent createCenterPanel() {
-			return new JScrollPane(availableLanguagesList);
+			return new JBScrollPane(availableLanguagesList);
 		}
 
 		/**

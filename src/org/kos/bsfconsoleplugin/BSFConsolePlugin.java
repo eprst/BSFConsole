@@ -9,7 +9,6 @@ import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.IconLoader;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -178,11 +177,6 @@ public class BSFConsolePlugin implements ProjectComponent, Configurable, Persist
 	@Override
 	public String getHelpTopic() {
 		return null;
-	}
-
-	@Override
-	public Icon getIcon() {
-		return IconLoader.getIcon("/org/kos/bsfconsoleplugin/icons/bsf.png");
 	}
 
 	@Override

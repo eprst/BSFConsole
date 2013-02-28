@@ -3,6 +3,9 @@ package org.kos.bsfconsoleplugin.languages;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.jetbrains.annotations.Nullable;
+
+
 /**
  * File name completion manager.
  *
@@ -47,7 +50,7 @@ public class FileNameCompletionManager implements CompletionManager {
 			return new String[0];
 
 		final File[] files = dir.listFiles();
-		if (files.length == 0)
+		if (files == null || files.length == 0)
 			return new String[0];
 
 		final ArrayList<String> res = new ArrayList<String>(files.length);
@@ -78,7 +81,7 @@ public class FileNameCompletionManager implements CompletionManager {
 		return i;
 	}
 
-	private boolean isAcceptableFile(final File file, final String fileNamePrefix) {
+	private boolean isAcceptableFile(final File file, @Nullable final String fileNamePrefix) {
 		if (fileNamePrefix != null && !file.getName().startsWith(fileNamePrefix))
 			return false;
 		return file.canRead();

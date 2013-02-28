@@ -1,5 +1,9 @@
 package org.kos.bsfconsoleplugin;
 
+
+import org.jetbrains.annotations.Nullable;
+
+
 /**
  * Abstract language interpreter interface.
  *
@@ -8,7 +12,7 @@ package org.kos.bsfconsoleplugin;
 public interface Interpreter {
 	void start();
 
-	void exec(String line);
+	void exec(@Nullable String line);
 
 	void stop();
 

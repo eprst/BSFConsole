@@ -5,8 +5,8 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.fileTypes.StdFileTypes;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.OrderRootType;
+import com.intellij.openapi.roots.CompilerModuleExtension;
+import com.intellij.openapi.vfs.JarFile;
 import com.intellij.openapi.vfs.JarFileSystem;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -67,7 +67,7 @@ public class ModuleClassLoaderFactory {
 	public static String getModuleClasspath(final Module module, final boolean includeOutputPath,
 	                                        final boolean includeTestsOutputPath) {
 		final ArrayList<File> paths = getModulePaths(module, includeOutputPath, includeTestsOutputPath);
-		final StringBuffer res = new StringBuffer();
+		final StringBuilder res = new StringBuilder();
 		final String pathSep = System.getProperty("path.separator");
 		boolean first = true;
 
@@ -82,15 +82,23 @@ public class ModuleClassLoaderFactory {
 		return res.toString();
 	}
 
-	private static ArrayList<File> getModulePaths(final Module module, final boolean includeOutputPath,
-	                                              final boolean includeTestsOutputPath) {
-		final ModuleRootManager mrm = ModuleRootManager.getInstance(module);
-		final VirtualFile[] files = mrm.getFiles(OrderRootType.CLASSES_AND_OUTPUT);
+	private static ArrayList<File> getModulePaths(final Module module, final boolean includeOutputPath, final boolean includeTestsOutputPath) {
+		final VirtualFile[] files = new VirtualFile[2];
+		final CompilerModuleExtension compilerModuleExtension = CompilerModuleExtension.getInstance(module);
+		if (compilerModuleExtension == null)
+			return new ArrayList<File>();
+
+		files[0] = compilerModuleExtension.getCompilerOutputPath();
+		files[0] = compilerModuleExtension.getCompilerOutputPathForTests();
+
 		final FileTypeManager ftmgr = FileTypeManager.getInstance();
 
 		final ArrayList<File> paths = new ArrayList<File>(files.length);
 
 		for (final VirtualFile virtualFile : files) {
+			if (virtualFile == null)
+				continue;
+
 			final FileType fileType = ftmgr.getFileTypeByFile(virtualFile);
 
 			if (!virtualFile.isValid())
@@ -107,9 +115,11 @@ public class ModuleClassLoaderFactory {
 			else if (fileSystem instanceof JarFileSystem) {
 				final JarFileSystem jarFileSystem = (JarFileSystem) fileSystem;
 				try {
-					final ZipFile jarFile = jarFileSystem.getJarFile(virtualFile);
+					final JarFile jarFile = jarFileSystem.getJarFile(virtualFile);
 					if (jarFile == null) continue;
-					file = new File(jarFile.getName());
+					final ZipFile zipFile = jarFile.getZipFile();
+					if (zipFile == null) continue;
+					file = new File(zipFile.getName());
 				} catch (IOException e) {
 					LOG.info("error getting jar file: " + e);
 					continue;

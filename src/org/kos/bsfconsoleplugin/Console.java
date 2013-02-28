@@ -76,11 +76,11 @@ public class Console extends JScrollPane implements KeyListener {
 	private final BSFConsolePlugin plugin;
 	private boolean constructed;
 
-	public Console(final BSFConsolePlugin plugin) {
+	public Console(@Nullable final BSFConsolePlugin plugin) {
 		this(plugin, null, null, null);
 	}
 
-	public Console(final BSFConsolePlugin plugin, @Nullable final InputStream cin, @Nullable final InputStream cerr, @Nullable final OutputStream cout) {
+	public Console(@Nullable final BSFConsolePlugin plugin, @Nullable final InputStream cin, @Nullable final InputStream cerr, @Nullable final OutputStream cout) {
 		this.plugin = plugin;
 		constructed = false;
 
@@ -694,7 +694,7 @@ public class Console extends JScrollPane implements KeyListener {
 		setStyle(old, true);
 	}
 
-	private AttributeSet setStyle(final Font font, final Color color) {
+	private AttributeSet setStyle(@Nullable final Font font, final Color color) {
 		assertEDT();
 		if (font != null)
 			return setStyle(

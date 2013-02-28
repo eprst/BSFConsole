@@ -1,6 +1,7 @@
 package org.kos.bsfconsoleplugin;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowAnchor;
 import com.intellij.openapi.wm.ToolWindowManager;
@@ -33,6 +34,7 @@ public class ConsolesManager {
 		final Project project = plugin.getProject();
 		final ToolWindowManager toolWindowManager = ToolWindowManager.getInstance(project);
 		toolWindow = toolWindowManager.registerToolWindow(BSFConsolePlugin.PLUGIN_NAME, true, ToolWindowAnchor.BOTTOM);
+		toolWindow.setIcon(IconLoader.getIcon("/org/kos/bsfconsoleplugin/icons/bean.png"));
 		contentManager = toolWindow.getContentManager();
 		addEmptyTab();
 

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="deploy" default="dist" basedir="..">
-	<property name="version" value="0.7.2"/>
-	<property name="idea.build" value="9712"/>
-	<!--<property name="idea.home" value="/home/kos/idea-${idea.build}"/>-->
+	<property name="version" value="0.8"/>
+	<property name="idea.build" value="123.169"/>
 	<property name="idea.home" value="/home/kos/idea"/>
 
 	<property name="plugin.name" value="BSFConsole"/>
@@ -31,8 +30,8 @@
 			<include name="jdom.jar"/>
 			<include name="asm.jar"/>
 			<include name="asm-commons.jar"/>
+      <include name="javac2.jar"/>
  		</fileset>
-		<fileset dir="${idea.redist.dir}" includes="javac2.jar"/>
 	</path>
 
 	<path id="project.classpath">
@@ -49,7 +48,7 @@
 
 	<taskdef
 		name="uidesigner"
-		classname="com.intellij.uiDesigner.ant.Javac2"
+		classname="com.intellij.ant.Javac2"
 		classpathref="uidesigner.classpath"/>
 
 	<target name="clean">

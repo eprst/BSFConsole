@@ -55,6 +55,7 @@ public class BSFInterpreter extends AbstractInterpreter {
 			if (plugin != null) {
 				final Triple<BSFManager, ClassLoader, String> triple = plugin.getClassLoaderManager().loadWithScriptClassLoader(BSFManager.class);
 				bsfManager = triple.getFst();
+				assert bsfManager != null;
 				bsfManager.setClassLoader(triple.getSnd());
 				if (triple.getTrd() != null)
 					bsfManager.setClassPath(triple.getTrd());
