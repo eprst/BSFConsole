@@ -7,6 +7,11 @@ import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.awt.*;
 
+import javax.swing.*;
+
+import org.jetbrains.annotations.NotNull;
+
+
 /**
  * Base class for language interpreters.
  *
@@ -67,7 +72,7 @@ public abstract class AbstractInterpreter implements Interpreter {
 //							continue;
 //						}
 								if (line.length() > 0) {
-									exec(line);
+									execInEDT(line);
 									fireCommandInputted(line);
 									printPrompt();
 								}
@@ -81,6 +86,15 @@ public abstract class AbstractInterpreter implements Interpreter {
 		);
 
 		inputThread.setDaemon(true);
+	}
+
+	protected void execInEDT(@NotNull final String line) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				exec(line);
+			}
+		});
 	}
 
 	abstract void terminateEngine();

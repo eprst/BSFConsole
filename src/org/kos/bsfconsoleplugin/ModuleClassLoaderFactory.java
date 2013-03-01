@@ -1,16 +1,5 @@
 package org.kos.bsfconsoleplugin;
 
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.fileTypes.FileTypeManager;
-import com.intellij.openapi.fileTypes.StdFileTypes;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.CompilerModuleExtension;
-import com.intellij.openapi.vfs.JarFile;
-import com.intellij.openapi.vfs.JarFileSystem;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileSystem;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +7,26 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.zip.ZipFile;
+
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.fileTypes.FileTypeManager;
+import com.intellij.openapi.fileTypes.StdFileTypes;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.roots.libraries.LibraryUtil;
+import com.intellij.openapi.vfs.JarFile;
+import com.intellij.openapi.vfs.JarFileSystem;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileSystem;
+import com.intellij.util.graph.Graph;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Factory for creating classloader for module.
@@ -83,19 +91,14 @@ public class ModuleClassLoaderFactory {
 	}
 
 	private static ArrayList<File> getModulePaths(final Module module, final boolean includeOutputPath, final boolean includeTestsOutputPath) {
-		final VirtualFile[] files = new VirtualFile[2];
-		final CompilerModuleExtension compilerModuleExtension = CompilerModuleExtension.getInstance(module);
-		if (compilerModuleExtension == null)
-			return new ArrayList<File>();
-
-		files[0] = compilerModuleExtension.getCompilerOutputPath();
-		files[0] = compilerModuleExtension.getCompilerOutputPathForTests();
+		final Module[] modules = getModuleWithTransitiveDependencies(module);
+		final VirtualFile[] libraryRoots = LibraryUtil.getLibraryRoots(modules, false, false);
 
 		final FileTypeManager ftmgr = FileTypeManager.getInstance();
 
-		final ArrayList<File> paths = new ArrayList<File>(files.length);
+		final ArrayList<File> paths = new ArrayList<File>(libraryRoots.length);
 
-		for (final VirtualFile virtualFile : files) {
+		for (final VirtualFile virtualFile : libraryRoots) {
 			if (virtualFile == null)
 				continue;
 
@@ -132,12 +135,12 @@ public class ModuleClassLoaderFactory {
 		}
 
 		if (includeOutputPath) {
-			final File file = new File(CompilerOutputPaths.getModuleOutputPath(module, false));
+			final File file = new File(CompilerOutputPaths.getModuleOutputPath(module));
 			if (fileIsValid(file))
 				paths.add(file);
 		}
 		if (includeTestsOutputPath) {
-			final File file = new File(CompilerOutputPaths.getModuleOutputPath(module, true));
+			final File file = new File(CompilerOutputPaths.getModuleTestOutputPath(module));
 			if (fileIsValid(file))
 				paths.add(file);
 		}
@@ -147,5 +150,28 @@ public class ModuleClassLoaderFactory {
 
 	private static boolean fileIsValid(final File file) {
 		return file.exists() && file.canRead();
+	}
+
+	@NotNull
+	private static Module[] getModuleWithTransitiveDependencies(@NotNull final Module m) {
+		final ModuleManager moduleManager = ModuleManager.getInstance(m.getProject());
+		final Graph<Module> graph = moduleManager.moduleGraph(true);
+		final List<Module> res = new ArrayList<Module>();
+		addModuleWithTransitiveDependencies(m, graph, res, new HashSet<String>());
+		return res.toArray(new Module[res.size()]);
+	}
+
+
+	private static void addModuleWithTransitiveDependencies(@NotNull final Module m, @NotNull final Graph<Module> g,
+	                                                        @NotNull final List<Module> res, @NotNull final Set<String> visitedModuleNames) {
+		res.add(m);
+		visitedModuleNames.add(m.getName());
+
+		final Iterator<Module> out = g.getOut(m);
+		while (out.hasNext()) {
+			final Module module = out.next();
+			if (!visitedModuleNames.contains(module.getName()))
+				addModuleWithTransitiveDependencies(module, g, res, visitedModuleNames);
+		}
 	}
 }

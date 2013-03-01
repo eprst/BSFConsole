@@ -18,6 +18,14 @@ public final class CompilerOutputPaths {
 	private static final Logger LOG = Logger.getInstance("org.kos.bsfconsoleplugin.CompilerOutputPaths");
 	private static final String NULL_PATH = "";
 
+	public static String getModuleOutputPath(final Module module) {
+		return getModuleOutputPath(module, false);
+	}
+
+	public static String getModuleTestOutputPath(final Module module) {
+		return getModuleOutputPath(module, true);
+	}
+
 	public static String getModuleOutputPath(final Module module, final boolean testsOutputPath) {
 		final CompilerModuleExtension cm = CompilerModuleExtension.getInstance(module);
 		if (cm == null) return NULL_PATH;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="deploy" default="dist" basedir="..">
-	<property name="version" value="0.8"/>
+	<property name="version" value="0.8.1"/>
 	<property name="idea.build" value="123.169"/>
 	<property name="idea.home" value="/home/kos/idea"/>
 

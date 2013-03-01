@@ -436,7 +436,7 @@ public class BSFConsoleConfigUI {
 		if (!testOutputPath)
 			return true;
 
-		return !CompilerOutputPaths.getModuleOutputPath(m, false).equals(CompilerOutputPaths.getModuleOutputPath(m, true));
+		return !CompilerOutputPaths.getModuleOutputPath(m).equals(CompilerOutputPaths.getModuleTestOutputPath(m));
 	}
 
 	private void enableAndCheck(final JCheckBox checkBox, final boolean enabled) {

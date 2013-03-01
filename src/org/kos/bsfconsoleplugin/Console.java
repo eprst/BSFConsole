@@ -2,6 +2,7 @@ package org.kos.bsfconsoleplugin;
 
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.util.IconLoader;
+import com.intellij.ui.JBColor;
 import org.jetbrains.annotations.Nullable;
 import org.kos.bsfconsoleplugin.languages.CompletionManager;
 import org.kos.bsfconsoleplugin.actions.console.NopAction;
@@ -563,6 +564,7 @@ public class Console extends JScrollPane implements KeyListener {
 		else
 			showline = history.get(history.size() - histLine);
 
+		setDefaultStyle();
 		replaceRange(showline, cmdStart, getTextLength());
 		text.setCaretPosition(getTextLength());
 		text.repaint();

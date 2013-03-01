@@ -17,7 +17,7 @@ import java.io.IOException;
 import org.jetbrains.annotations.Nullable;
 
 public class ClassLoaderManager {
-	private static final Logger LOG = Logger.getInstance("org.kos.bsfconsoleplugin.ClassLoaderManager");
+	private static final Logger LOG = Logger.getInstance(ClassLoaderManager.class);
 	private static URL[] antAndPluginLibs;
 	private static String pureClassPath; //java.class.path without module paths
 
