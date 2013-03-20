@@ -32,20 +32,20 @@ public class Console extends JScrollPane implements KeyListener {
 	/**
 	 * System.out color.
 	 */
-	public static final Color OUT_COLOR = new Color(0, 128, 0); //todo: make customizable
+	public static final JBColor OUT_COLOR = new JBColor(0x008000, 0x80ff80); //todo: make customizable; use accessors
 	/**
 	 * System.err color.
 	 */
-	public static final Color ERR_COLOR = Color.RED; //todo: make customizable
+	private static final JBColor ERR_COLOR = JBColor.RED; //todo: make customizable
 	/**
 	 * Prompt color.
 	 */
-	public static final Color PROMPT_COLOR = Color.BLUE; //todo: make customizable
+	private static final JBColor PROMPT_COLOR = JBColor.BLUE; //todo: make customizable
 	/**
 	 * Completions color.
 	 */
-	public static final Color COMPLETIONS_COLOR = Color.GRAY; //todo: make customizable
-	public static final Color INPUT_COLOR = Color.BLACK;
+	private static final JBColor COMPLETIONS_COLOR = JBColor.GRAY; //todo: make customizable
+	private static final JBColor INPUT_COLOR = new JBColor(0, 0xd0d0d0); //JBColor.BLACK;
 
 	private static final Icon ERROR_ICON = IconLoader.getIcon("/compiler/error.png");
 

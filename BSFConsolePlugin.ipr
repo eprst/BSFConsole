@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AntConfiguration">
-    <defaultAnt bundledAnt="true" />
     <buildFile url="file://$PROJECT_DIR$/build/build.xml">
       <additionalClassPath>
         <entry path="file://$INTELLIJ_HOME$/lib/junit.jar" />
       </additionalClassPath>
       <antReference bundledAnt="true" />
-      <customJdkName value="" />
-      <maximumHeapSize value="128" />
       <maximumStackSize value="32" />
       <properties>
         <property name="idea.home" value="$APPLICATION_HOME_DIR$" />
