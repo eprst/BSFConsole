@@ -71,14 +71,14 @@ public class ClassLoaderManager {
 		return pluginCLI;
 	}
 
-	public <T> Triple<T, ClassLoader, String> loadWithScriptClassLoader(final Class<T> originalClass) {
+	public <T> Triplet<T, ClassLoader, String> loadWithScriptClassLoader(final Class<T> originalClass) {
 		final ClassLoaderInfo loaderInfo = getModuleClassLoader();
 		@SuppressWarnings({"unchecked"}) final T res = (T) loadUsingClassLoader(loaderInfo.classLoader, originalClass.getName());
 		if (loaderInfo.classPath != null) {
 			//res.setClassPath(cp);
 			System.setProperty("java.class.path", loaderInfo.classPath); //exclusively for BeanShell and Groovy!
 		}
-		return new Triple<T, ClassLoader, String>(res, loaderInfo.classLoader, loaderInfo.classPath);
+		return new Triplet<T, ClassLoader, String>(res, loaderInfo.classLoader, loaderInfo.classPath);
 	}
 
 	@Nullable

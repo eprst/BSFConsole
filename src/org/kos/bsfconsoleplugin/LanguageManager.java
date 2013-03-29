@@ -23,6 +23,12 @@ public class LanguageManager {
 		jsr223LanguagesRegistry = new JSR223LanguagesRegistry(plugin);
 	}
 
+	public void reset() {
+		allLanguages.clear();
+		availableLanguages.clear();
+		getJSR223LanguagesRegistry().resetLanguages();
+	}
+
 	public void registerBSFLanguages() {
 		for (final BSFLanguage bsfLanguage : plugin.getConfig().getBsfLanguagesRegistry().getBsfLanguages()) {
 			final String languageName = bsfLanguage.languageName;
@@ -31,7 +37,7 @@ public class LanguageManager {
 		}
 	}
 
-	public JSR223LanguagesRegistry getJsr223LanguagesRegistry() {
+	public JSR223LanguagesRegistry getJSR223LanguagesRegistry() {
 		assert jsr223LanguagesRegistry != null : "a1";
 		return jsr223LanguagesRegistry;
 	}
@@ -40,7 +46,7 @@ public class LanguageManager {
 	public Language findLanguageByLabel(@NotNull final String label) {
 		final Language l = findLanguageByLabel(label, plugin.getConfig().getBsfLanguagesRegistry().getBsfLanguages());
 		if (l != null) return l;
-		return findLanguageByLabel(label, getJsr223LanguagesRegistry().getLanguages());
+		return findLanguageByLabel(label, getJSR223LanguagesRegistry().getLanguages());
 	}
 
 	@Nullable
@@ -56,7 +62,7 @@ public class LanguageManager {
 		if (availableLanguages == null || availableLanguages.size() == 0) {
 			availableLanguages = new ArrayList<Language>();
 			availableLanguages.addAll(plugin.getConfig().getBsfLanguagesRegistry().getAvailableBSFLanguages());
-			availableLanguages.addAll(getJsr223LanguagesRegistry().getAvailableLanguages());
+			availableLanguages.addAll(getJSR223LanguagesRegistry().getAvailableLanguages());
 		}
 		return availableLanguages;
 	}
@@ -65,7 +71,7 @@ public class LanguageManager {
 		if (allLanguages == null || allLanguages.size() == 0) {
 			allLanguages = new ArrayList<Language>();
 			allLanguages.addAll(plugin.getConfig().getBsfLanguagesRegistry().getBsfLanguages());
-			allLanguages.addAll(getJsr223LanguagesRegistry().getLanguages());
+			allLanguages.addAll(getJSR223LanguagesRegistry().getLanguages());
 		}
 		return allLanguages;
 	}

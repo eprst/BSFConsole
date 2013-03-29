@@ -21,6 +21,7 @@
       <map>
         <entry key="[BSF] ant" value="1358" />
         <entry key="[BSF] beanshell" value="1665" />
+        <entry key="[JSR-223] Groovy" value="1818" />
       </map>
     </option>
     <option name="searchOptions">
@@ -396,7 +397,6 @@
         <root url="jar://$PROJECT_DIR$/lib/sat.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/xpath-engine.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/jruby-engine.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/bsh-2.0b4.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.1.1.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/bsf.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/ognl-engine.jar!/" />
@@ -415,6 +415,7 @@
         <root url="jar://$PROJECT_DIR$/lib/juel-engine.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/swing-worker-1.2.jar!/" />
         <root url="jar://$INTELLIJ_HOME$/lib/ant/lib/ant.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/bsh-2.2.0.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />

@@ -51,7 +51,8 @@ public class ModuleClassLoaderFactory {
 	                                                  final boolean includeOutputPath, final boolean includeTestsOutputPath,
 	                                                  final URL[] additionalPaths) {
 
-		final ArrayList<File> paths = getModulePaths(module, includeOutputPath, includeTestsOutputPath);
+//		final ArrayList<File> paths = getModulePaths(module, includeOutputPath, includeTestsOutputPath);
+		final ArrayList<File> paths = getModulePaths(module, false, false);
 
 		final URL[] urls = new URL[paths.size() + additionalPaths.length];
 		int i = 0;
@@ -66,10 +67,44 @@ public class ModuleClassLoaderFactory {
 		for (final URL additionalPath : additionalPaths)
 			urls[i++] = additionalPath;
 
+		final ClassLoader moduleClassLoader;
+
 		if (parentClassLoader == null)
-			return new URLClassLoader(urls);
+			moduleClassLoader = new URLClassLoader(urls);
 		else
-			return new URLClassLoader(urls, parentClassLoader);
+			moduleClassLoader = new URLClassLoader(urls, parentClassLoader);
+
+		final String[] outputAndTestPaths = getOutputAndTestPaths(module, includeOutputPath, includeTestsOutputPath);
+
+		if (outputAndTestPaths.length == 0)
+			return moduleClassLoader;
+
+		return new ReloadingClassLoader(outputAndTestPaths, moduleClassLoader);
+	}
+
+	private static String[] getOutputAndTestPaths(final Module module, final boolean includeOutputPath, final boolean includeTestsOutputPath) {
+		if (!includeOutputPath && !includeTestsOutputPath)
+			return new String[0];
+
+		final ArrayList<File> paths = new ArrayList<File>(2);
+
+		if (includeOutputPath) {
+			final File file = new File(CompilerOutputPaths.getModuleOutputPath(module));
+			if (fileIsValid(file))
+				paths.add(file);
+		}
+		if (includeTestsOutputPath) {
+			final File file = new File(CompilerOutputPaths.getModuleTestOutputPath(module));
+			if (fileIsValid(file))
+				paths.add(file);
+		}
+
+
+		final String[] names = new String[paths.size()];
+		for (int i = 0; i < paths.size(); i++)
+			names[i] = paths.get(i).getAbsolutePath();
+
+		return names;
 	}
 
 	public static String getModuleClasspath(final Module module, final boolean includeOutputPath,

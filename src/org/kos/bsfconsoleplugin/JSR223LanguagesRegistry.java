@@ -62,6 +62,11 @@ public class JSR223LanguagesRegistry {
 		Collections.sort(languages);
 	}
 
+	public void resetLanguages() {
+		languagesInitialized = false;
+		languages.clear();
+	}
+
 	public List<JSR223Language> getLanguages() {
 		initLanguages();
 		return languages;

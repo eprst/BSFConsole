@@ -1,12 +1,18 @@
 <idea-plugin url="http://plugins.intellij.net/plugin/?id=6">
 	<name>BSFConsole</name>
 	<description>BSF and JSR-223 scripting console, also includes Ant console.</description>
-	<version>0.8.2</version>
+	<version>0.8.3</version>
 	<vendor email="konstantin.sobolev@gmail.com">Konstantin Sobolev</vendor>
 	<idea-version since-build="123.169"/>
 
 	<change-notes>
 		<![CDATA[<html>
+		<h3>0.8.3</h3>
+		<ul>
+			<li>Attempt at dynamic classes reloading</li>
+			<li>Bundled BeanShell 2.2-trunk</li>
+			<li>Bugfixes</li>
+		</ul>
 		<h3>0.8.2</h3>
 		<ul>
 			<li>Dracula-compatible colors</li>
@@ -253,7 +259,7 @@
 		        class="org.kos.bsfconsoleplugin.actions.CopyAction"
 		        text="Copy"
 		        description="Copy to clipboard"
-		        icon="/actions/menu-copy.png"/>
+		        icon="/actions/copy.png"/>
 		<action id="BSFConsole.Cut"
 		        class="org.kos.bsfconsoleplugin.actions.CutAction"
 		        text="Cut"

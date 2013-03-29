@@ -53,12 +53,12 @@ public class BSFInterpreter extends AbstractInterpreter {
 			//plugin may be null in tests
 			final BSFManager bsfManager;
 			if (plugin != null) {
-				final Triple<BSFManager, ClassLoader, String> triple = plugin.getClassLoaderManager().loadWithScriptClassLoader(BSFManager.class);
-				bsfManager = triple.getFst();
+				final Triplet<BSFManager, ClassLoader, String> triplet = plugin.getClassLoaderManager().loadWithScriptClassLoader(BSFManager.class);
+				bsfManager = triplet.getFst();
 				assert bsfManager != null;
-				bsfManager.setClassLoader(triple.getSnd());
-				if (triple.getTrd() != null)
-					bsfManager.setClassPath(triple.getTrd());
+				bsfManager.setClassLoader(triplet.getSnd());
+				if (triplet.getTrd() != null)
+					bsfManager.setClassPath(triplet.getTrd());
 			} else {
 				bsfManager = new BSFManager();
 			}

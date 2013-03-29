@@ -5,14 +5,14 @@ import org.jetbrains.annotations.Nullable;
 
 
 /**
- * Triple of objects.
+ * Triplet of objects.
  */
-public class Triple<A,B,C> {
+public class Triplet<A, B, C> {
 	private final A fst;
 	private final B snd;
 	private final C trd;
 
-	public Triple(@Nullable final A fst, @Nullable final B snd, @Nullable final C trd) {
+	public Triplet(@Nullable final A fst, @Nullable final B snd, @Nullable final C trd) {
 		this.fst = fst;
 		this.snd = snd;
 		this.trd = trd;
@@ -31,5 +31,10 @@ public class Triple<A,B,C> {
 	@Nullable
 	public C getTrd() {
 		return trd;
+	}
+
+	@Override
+	public String toString() {
+		return "Triplet{" + fst + ", " + snd + ", " + trd + '}';
 	}
 }
