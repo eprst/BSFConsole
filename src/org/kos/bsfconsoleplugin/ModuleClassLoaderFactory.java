@@ -3,10 +3,10 @@ package org.kos.bsfconsoleplugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -27,6 +27,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.intellij.util.graph.Graph;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 
 /**
  * Factory for creating classloader for module.
@@ -39,52 +41,52 @@ public class ModuleClassLoaderFactory {
 	/**
 	 * Gets classloader for the passed module.
 	 *
-	 * @param module            module to get classloader for.
-	 * @param parentClassLoader parent class loader.
-	 * @param includeOutputPath if output path must be included.
+	 * @param module                 module to get classloader for.
+	 * @param parentClassLoaderInfo  parent class loader info.
+	 * @param includeOutputPath      if output path must be included.
 	 * @param includeTestsOutputPath if tests path must be included.
-	 * @param additionalPaths   additional paths.
 	 *
 	 * @return classloader for the module.
 	 */
-	public static ClassLoader getClassLoaderForModule(final Module module, final ClassLoader parentClassLoader,
-	                                                  final boolean includeOutputPath, final boolean includeTestsOutputPath,
-	                                                  final URL[] additionalPaths) {
+	@NotNull
+	public static ClassLoaderInfo getClassLoaderInfoForModule(@NotNull final Module module, @Nullable final ClassLoaderInfo parentClassLoaderInfo,
+	                                                          final boolean includeOutputPath, final boolean includeTestsOutputPath) {
 
 //		final ArrayList<File> paths = getModulePaths(module, includeOutputPath, includeTestsOutputPath);
-		final ArrayList<File> paths = getModulePaths(module, false, false);
+		final ArrayList<File> moduleLibraryFiles = getModulePaths(module, false, false);
 
-		final URL[] urls = new URL[paths.size() + additionalPaths.length];
-		int i = 0;
-		for (final File path : paths) {
-			try {
-				urls[i++] = path.toURI().toURL();
-			} catch (MalformedURLException e) {
-				LOG.error("Error converting file '" + path.getAbsolutePath() + "' to URL", e);
-			}
+		final URL[] librariesURLs = ClassLoaderInfo.filesToUrls(moduleLibraryFiles.toArray(new File[moduleLibraryFiles.size()]));
+
+		final ClassLoader librariesAndParentClassLoader;
+		final List<URL> librariesAndParentURLs = new ArrayList<URL>();
+
+		if (parentClassLoaderInfo == null) {
+			librariesAndParentClassLoader = new URLClassLoader(librariesURLs);
+			librariesAndParentURLs.addAll(Arrays.asList(librariesURLs));
+		}
+		else {
+			librariesAndParentClassLoader = new URLClassLoader(librariesURLs, parentClassLoaderInfo.classLoader);
+			librariesAndParentURLs.addAll(Arrays.asList(parentClassLoaderInfo.classPathURLs()));
+			librariesAndParentURLs.addAll(Arrays.asList(librariesURLs));
 		}
 
-		for (final URL additionalPath : additionalPaths)
-			urls[i++] = additionalPath;
+		final URL[] outputAndTestPaths = getOutputAndTestPaths(module, includeOutputPath, includeTestsOutputPath);
 
-		final ClassLoader moduleClassLoader;
+		if (outputAndTestPaths.length == 0) {
+			return new ClassLoaderInfo(librariesAndParentClassLoader, librariesAndParentURLs.toArray(new URL[librariesAndParentURLs.size()]));
+		}
 
-		if (parentClassLoader == null)
-			moduleClassLoader = new URLClassLoader(urls);
-		else
-			moduleClassLoader = new URLClassLoader(urls, parentClassLoader);
+		final List<URL> outputAndLibrariesAndParentURLs = new ArrayList<URL>();
+		outputAndLibrariesAndParentURLs.addAll(Arrays.asList(outputAndTestPaths));
+		outputAndLibrariesAndParentURLs.addAll(librariesAndParentURLs);
 
-		final String[] outputAndTestPaths = getOutputAndTestPaths(module, includeOutputPath, includeTestsOutputPath);
-
-		if (outputAndTestPaths.length == 0)
-			return moduleClassLoader;
-
-		return new ReloadingClassLoader(outputAndTestPaths, moduleClassLoader);
+		final ClassLoader reloadingCL = new ReloadingClassLoader(outputAndTestPaths, librariesAndParentClassLoader);
+		return new ClassLoaderInfo(reloadingCL, outputAndLibrariesAndParentURLs.toArray(new URL[outputAndLibrariesAndParentURLs.size()]));
 	}
 
-	private static String[] getOutputAndTestPaths(final Module module, final boolean includeOutputPath, final boolean includeTestsOutputPath) {
+	private static URL[] getOutputAndTestPaths(final Module module, final boolean includeOutputPath, final boolean includeTestsOutputPath) {
 		if (!includeOutputPath && !includeTestsOutputPath)
-			return new String[0];
+			return new URL[0];
 
 		final ArrayList<File> paths = new ArrayList<File>(2);
 
@@ -99,30 +101,7 @@ public class ModuleClassLoaderFactory {
 				paths.add(file);
 		}
 
-
-		final String[] names = new String[paths.size()];
-		for (int i = 0; i < paths.size(); i++)
-			names[i] = paths.get(i).getAbsolutePath();
-
-		return names;
-	}
-
-	public static String getModuleClasspath(final Module module, final boolean includeOutputPath,
-	                                        final boolean includeTestsOutputPath) {
-		final ArrayList<File> paths = getModulePaths(module, includeOutputPath, includeTestsOutputPath);
-		final StringBuilder res = new StringBuilder();
-		final String pathSep = System.getProperty("path.separator");
-		boolean first = true;
-
-		for (final File path : paths) {
-			if (!first)
-				res.append(pathSep);
-			else
-				first = false;
-			res.append(path.getAbsolutePath());
-		}
-
-		return res.toString();
+		return ClassLoaderInfo.filesToUrls(paths.toArray(new File[paths.size()]));
 	}
 
 	private static ArrayList<File> getModulePaths(final Module module, final boolean includeOutputPath, final boolean includeTestsOutputPath) {
@@ -195,7 +174,6 @@ public class ModuleClassLoaderFactory {
 		addModuleWithTransitiveDependencies(m, graph, res, new HashSet<String>());
 		return res.toArray(new Module[res.size()]);
 	}
-
 
 	private static void addModuleWithTransitiveDependencies(@NotNull final Module m, @NotNull final Graph<Module> g,
 	                                                        @NotNull final List<Module> res, @NotNull final Set<String> visitedModuleNames) {

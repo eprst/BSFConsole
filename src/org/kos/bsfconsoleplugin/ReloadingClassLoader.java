@@ -24,16 +24,10 @@ public class ReloadingClassLoader extends ClassLoader {
 	@Nullable
 	private ClassLoader delegate = null;
 
-	public ReloadingClassLoader(final String[] classPath, final ClassLoader parent) {
+	public ReloadingClassLoader(final URL[] urls, final ClassLoader parent) {
 		super(parent);
-		this.classPath = classPath;
-		this.urls = new URL[classPath.length];
-		for (int i = 0; i < classPath.length; i++)
-			try {
-				urls[i] = new File(classPath[i]).toURI().toURL();
-			} catch (MalformedURLException e) {
-				throw new RuntimeException(e);
-			}
+		this.urls = urls;
+		this.classPath = ClassLoaderInfo.urlsToStrings(urls);
 	}
 
 	@Override

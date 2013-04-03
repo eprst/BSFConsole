@@ -10,7 +10,7 @@
 		<h3>0.8.3</h3>
 		<ul>
 			<li>Attempt at dynamic classes reloading</li>
-			<li>Bundled BeanShell 2.2-trunk</li>
+			<li>Bundled BeanShell 2.2-trunk with varargs support</li>
 			<li>Bugfixes</li>
 		</ul>
 		<h3>0.8.2</h3>
@@ -259,17 +259,23 @@
 		        class="org.kos.bsfconsoleplugin.actions.CopyAction"
 		        text="Copy"
 		        description="Copy to clipboard"
-		        icon="/actions/copy.png"/>
+		        icon="/actions/copy.png">
+			<keyboard-shortcut first-keystroke="control C" keymap="$default"/>
+		</action>
 		<action id="BSFConsole.Cut"
 		        class="org.kos.bsfconsoleplugin.actions.CutAction"
 		        text="Cut"
 		        description="Cut to clipboard"
-		        icon="/actions/menu-cut.png"/>
+		        icon="/actions/menu-cut.png">
+			<keyboard-shortcut first-keystroke="control X" keymap="$default"/>
+		</action>
 		<action id="BSFConsole.Paste"
 		        class="org.kos.bsfconsoleplugin.actions.PasteAction"
 		        text="Paste"
 		        description="Paste from clipboard"
-		        icon="/actions/menu-paste.png"/>
+		        icon="/actions/menu-paste.png">
+			<keyboard-shortcut first-keystroke="control V" keymap="$default"/>
+		</action>
 
 		<action id="BSFConsole.ClearRecentCommands"
 		        class="org.kos.bsfconsoleplugin.actions.ClearRecentCommandsAction"

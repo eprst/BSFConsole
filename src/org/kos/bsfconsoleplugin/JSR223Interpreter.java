@@ -93,7 +93,7 @@ public class JSR223Interpreter extends AbstractInterpreter {
 
 	private ClassLoader getInterpreterClassLoader() {
 		//return engine.getClass().getClassLoader();
-		return plugin.getClassLoaderManager().getModuleClassLoader().classLoader;
+		return plugin.getClassLoaderManager().getModuleClassLoaderInfo().classLoader;
 	}
 
 	private void _eval(final String line) throws ScriptException {

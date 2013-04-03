@@ -9,6 +9,7 @@ import org.apache.bsf.BSFManager;
 import org.apache.bsf.util.CodeBuffer;
 import org.kos.bsfconsoleplugin.BSFConsolePlugin;
 import org.jetbrains.annotations.Nullable;
+import org.kos.bsfconsoleplugin.FileUtils;
 
 import java.beans.PropertyChangeEvent;
 import java.io.*;
@@ -253,10 +254,10 @@ public class AntConsoleBSFEngine implements BSFEngine {
 			final File antLibs = new File(libPath, "ant");
 			if (antLibs.exists()) {
 				final File[] jarFiles = antLibs.listFiles(
-						new FilenameFilter() {
+						new FileFilter() {
 							@Override
-							public boolean accept(final File dir, final String name) {
-								return name.endsWith(".jar");
+							public boolean accept(final File file) {
+								return FileUtils.isJarFile(file);
 							}
 						}
 				);

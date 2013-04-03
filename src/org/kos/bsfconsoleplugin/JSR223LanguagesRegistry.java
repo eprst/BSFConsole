@@ -34,8 +34,8 @@ public class JSR223LanguagesRegistry {
 		assert plugin != null;
 		final ClassLoaderManager classLoaderManager = plugin.getClassLoaderManager();
 
-		final ClassLoaderInfo classLoaderInfo = classLoaderManager.getModuleClassLoader();
-		final String classPath = classLoaderInfo.classPath;
+		final ClassLoaderInfo classLoaderInfo = classLoaderManager.getModuleClassLoaderInfo();
+		final String classPath = classLoaderInfo.joinedClassPath();
 		final String sunBootClassPath = System.getProperty("sun.boot.class.path");
 		if (sunBootClassPath != null && !sunBootClassPath.contains(classPath)) { //hack for Scala
 			final String pathSep = System.getProperty("path.separator");
